@@ -1,6 +1,7 @@
 from django.forms import widgets
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest.models import Project
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,3 +11,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'username', 'manager', 'subordinates')
+
+
+class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Project
+        fields = ('url', 'title', 'notes')
