@@ -1,14 +1,12 @@
 from django_fsm import has_transition_perm
-
 from rest_framework.decorators import api_view, detail_route
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
-
 from rest_framework.reverse import reverse
-
 from rest_framework.response import Response
 from rest_framework import viewsets
 from django.contrib.auth.models import User
+from rest_framework import permissions
 
 from rest.models import Project, PersonRequest
 from rest.serializers import UserSerializer, ProjectSerializer, PersonRequestSerializer
@@ -25,16 +23,22 @@ def api_root(request, format=None):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
 
 class PersonRequestViewSet(get_viewset_transition_actions_mixin(PersonRequest), viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+
     queryset = PersonRequest.objects.all()
     serializer_class = PersonRequestSerializer
 
