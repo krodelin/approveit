@@ -6,19 +6,40 @@ from rest.models import Project, PersonRequest
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    manager = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True, source="profile.manager")
+    manager = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=False, source='profile.manager',
+                                                  queryset=User.objects.all())
     subordinates = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True, many=True)
 
-    requester_requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
-    requestee_requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
+    # requester_requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
+    # requestee_requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'manager', 'subordinates', 'requester_requests', 'requestee_requests')
+        fields = ('url', 'username',
+                  # 'requester_requests', 'requestee_requests',
+                  'manager', 'subordinates',
+        )
+
+    def create(self, validated_data):
+        manager_ = validated_data['profile']['manager']
+        del validated_data['profile']
+        instance = super(serializers.HyperlinkedModelSerializer, self).create(validated_data)
+        instance.profile.manager = manager_
+        instance.profile.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        manager_ = validated_data['profile']['manager']
+        del validated_data['profile']
+        instance = super(serializers.HyperlinkedModelSerializer, self).update(instance, validated_data)
+        instance.profile.manager = manager_
+        instance.profile.save()
+        return instance
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
-    requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
+    requests = serializers.HyperlinkedRelatedField(view_name='personrequest-detail', read_only=True, many=True)
+
 
     class Meta:
         model = Project
