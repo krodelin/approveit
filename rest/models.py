@@ -1,21 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django_fsm import FSMField, transition
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.authtoken.models import Token
+from django.conf import settings
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance=None, created=False, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
     manager = models.ForeignKey(User, related_name='subordinates', null=True)
-
-
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-
-post_save.connect(create_user_profile, sender=User)
 
 
 class Project(models.Model):

@@ -1,4 +1,5 @@
 from django_fsm import has_transition_perm
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.decorators import api_view, detail_route
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
@@ -22,23 +23,27 @@ def api_root(request, format=None):
     })
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class AuthMixin:
+    authentication_classes = (TokenAuthentication,
+                              SessionAuthentication)
     permission_classes = (permissions.IsAuthenticated,)
 
+
+class UserViewSet(AuthMixin,
+                  viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class ProjectViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
-
+class ProjectViewSet(AuthMixin,
+                     viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
 
-class PersonRequestViewSet(get_viewset_transition_actions_mixin(PersonRequest), viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
-
+class PersonRequestViewSet(AuthMixin,
+                           get_viewset_transition_actions_mixin(PersonRequest),
+                           viewsets.ModelViewSet):
     queryset = PersonRequest.objects.all()
     serializer_class = PersonRequestSerializer
 
