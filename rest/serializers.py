@@ -8,10 +8,10 @@ from rest.models import Project, PersonRequest
 
 h = hashlib.new('md5')
 h.update("PREFIX".encode("utf-8"))
-BOGUS_PASSWORD= h.hexdigest()
+BOGUS_PASSWORD = h.hexdigest()
+
 
 class PasswordField(serializers.CharField):
-
     def to_representation(self, obj):
         return BOGUS_PASSWORD
 
@@ -25,7 +25,7 @@ class PasswordField(serializers.CharField):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     manager = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=False, source='profile.manager',
-                                                  queryset=User.objects.all())
+                                                  queryset=User.objects.all(), allow_null=True)
     subordinates = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True, many=True)
     password = PasswordField()
 
