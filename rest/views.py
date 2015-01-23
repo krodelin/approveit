@@ -1,6 +1,6 @@
 from django_fsm import has_transition_perm
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-from rest_framework.decorators import api_view, detail_route
+from rest_framework.decorators import api_view, detail_route, list_route
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.reverse import reverse
@@ -33,6 +33,10 @@ class UserViewSet(AuthMixin,
                   viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    @list_route(methods=['get'])
+    def current(self, request):
+        return Response(UserSerializer(request.user, context={'request': request}).data)
 
 
 class ProjectViewSet(AuthMixin,
