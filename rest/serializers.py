@@ -1,21 +1,40 @@
-from django.forms import widgets
+import hashlib
+
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from django_fsm import FSMField
+
 from rest.models import Project, PersonRequest
+
+h = hashlib.new('md5')
+h.update("PREFIX".encode("utf-8"))
+BOGUS_PASSWORD = h.hexdigest()
+
+
+class PasswordField(serializers.CharField):
+    def to_representation(self, obj):
+        return BOGUS_PASSWORD
+
+    def to_internal_value(self, data):
+        if data != BOGUS_PASSWORD:
+            return make_password(data)
+        else:
+            instance = self.parent.instance
+            return instance.password
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     manager = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=False, source='profile.manager',
-                                                  queryset=User.objects.all())
+                                                  queryset=User.objects.all(), allow_null=True)
     subordinates = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True, many=True)
+    password = PasswordField()
 
     # requester_requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
     # requestee_requests = serializers.HyperlinkedRelatedField(view_name='request-detail', read_only=True, many=True)
 
     class Meta:
         model = User
-        fields = ('url', 'username',
+        fields = ('url', 'username', 'email', 'password',
                   # 'requester_requests', 'requestee_requests',
                   'manager', 'subordinates',
         )
