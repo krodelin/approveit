@@ -10,7 +10,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE = os.path.abspath(os.path.dirname(__name__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,6 +39,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_swagger',
+    'django_fsm',
+
+    'rest',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +73,17 @@ DATABASES = {
     }
 }
 
+if os.environ.get("DATABASE_URL"):
+    # Parse database configuration from $DATABASE_URL
+    DATABASES['default'] = dj_database_url.config()
+
+    # Enable Connection Pooling
+    DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
+
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -79,5 +100,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
+STATICFILES_DIRS = (os.path.join(BASE, "static"),)
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 STATIC_URL = '/static/'
+
