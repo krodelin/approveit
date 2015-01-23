@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE = os.path.abspath(os.path.dirname(__name__))
 
@@ -70,6 +72,17 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+if os.environ.get("DATABASE_URL"):
+    # Parse database configuration from $DATABASE_URL
+    DATABASES['default'] = dj_database_url.config()
+
+    # Enable Connection Pooling
+    DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
+
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
