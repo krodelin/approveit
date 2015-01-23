@@ -1,1 +1,1 @@
-web: gunicorn rest.wsgi --log-file -
+web: gunicorn approveit.wsgi --log-file -
