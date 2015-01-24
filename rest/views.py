@@ -3,11 +3,13 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework.decorators import api_view, detail_route, list_route
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
+from rest_framework.renderers import JSONRenderer
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from rest_framework import permissions
+from rest_framework.views import APIView
 
 from rest.models import Project, PersonRequest
 from rest.serializers import UserSerializer, ProjectSerializer, PersonRequestSerializer
@@ -62,6 +64,10 @@ class PersonRequestViewSet(AuthMixin,
         return Response(PersonRequestSerializer(person_request, context={'request': request}).data)
 
 
+class DeleteAuthToken(APIView):
+    renderer_classes = (JSONRenderer,)
 
+    def get(self, request, format=None):
+        return Response({'response': 'success'})
 
-
+delete_auth_token = DeleteAuthToken.as_view()
