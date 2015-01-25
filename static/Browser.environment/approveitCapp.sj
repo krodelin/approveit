@@ -1,4 +1,4 @@
-@STATIC;1.0;p;15;AppController.jt;16687;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;20;UserSessionManager.ji;16;UserController.ji;19;ProjectController.jt;16549;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("UserSessionManager.j", YES);objj_executeFile("UserController.j", YES);objj_executeFile("ProjectController.j", YES);var LogoutTimeout = 10,
+@STATIC;1.0;p;15;AppController.jt;16665;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;20;UserSessionManager.ji;16;UserController.ji;19;ProjectController.jt;16527;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("UserSessionManager.j", YES);objj_executeFile("UserController.j", YES);objj_executeFile("ProjectController.j", YES);var LogoutTimeout = 10,
     LogoutCountdownMessage = "If you do nothing, you will be logged out automatically in %@ seconds.";
 {var the_class = objj_allocateClassPair(CPObject, "AppController"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("theWindow"), new objj_ivar("_outlineView"), new objj_ivar("_contentView"), new objj_ivar("_activeController"), new objj_ivar("_sources")]);objj_registerClassPair(the_class);
@@ -60,7 +60,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("sources"), function $Ap
         return ((___r1 = ((___r2 = self._sources), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "allKeys"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "objectAtIndex:", index));
     }
     return ((___r1 = ((___r2 = self._sources), ___r2 == null ? null : ___r2.isa.objj_msgSend1(___r2, "objectForKey:", item))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "objectAtIndex:", index));
-    debugger;
     var ___r1, ___r2;
 }
 ,["id","CPOutlineView","CPInteger","id"]), new objj_method(sel_getUid("outlineView:isItemExpandable:"), function $AppController__outlineView_isItemExpandable_(self, _cmd, outlineView, item)
@@ -114,7 +113,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("sources"), function $Ap
     if ((newController == null ? null : newController.isa.objj_msgSend1(newController, "isEqual:", self._activeController)))
         return;
     self.isa.objj_msgSend1(self, "willChangeValueForKey:", "mainContentController");
-    ((___r1 = self._activeController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "hideInspector:", self));
     ((___r1 = ((___r2 = self._activeController), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "view"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
     ((___r1 = (newController == null ? null : newController.isa.objj_msgSend0(newController, "view"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFrame:", ((___r2 = self._contentView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "bounds"))));
     ((___r1 = self._contentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addSubview:", (newController == null ? null : newController.isa.objj_msgSend0(newController, "view"))));
@@ -129,7 +127,10 @@ class_addMethods(the_class, [new objj_method(sel_getUid("sources"), function $Ap
     var cookie = ((___r1 = CPCookie.isa.objj_msgSend0(CPCookie, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithName:", "csrftoken")),
         csrfToken = (cookie == null ? null : cookie.isa.objj_msgSend0(cookie, "value")),
         authenticationToken = ((___r1 = UserSessionManager.isa.objj_msgSend0(UserSessionManager, "defaultManager")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "authenticationToken"));
+    CPLog.debug("CSRF-Token " + csrfToken);
+    CPLog.debug("Auth-Token" + authenticationToken);
     (aRequest == null ? null : aRequest.isa.objj_msgSend2(aRequest, "setValue:forHTTPHeaderField:", csrfToken, "X-CSRFToken"));
+    debugger;
     if (authenticationToken)
         (aRequest == null ? null : aRequest.isa.objj_msgSend2(aRequest, "setValue:forHTTPHeaderField:", "Token " + authenticationToken, "Authorization"));
     var ___r1;
@@ -525,7 +526,7 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("keyPathsForValuesAffec
     return CPSet.isa.objj_msgSend3(CPSet, "setWithObjects:", "password", "confirm", nil);
 }
 ,["CPSet"])]);
-}p;9;Project.jt;13029;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.ji;6;User.jt;12956;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);objj_executeFile("User.j", YES);{var the_class = objj_allocateClassPair(RemoteObject, "Project"),
+}p;9;Project.jt;13015;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.ji;6;User.jt;12942;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);objj_executeFile("User.j", YES);{var the_class = objj_allocateClassPair(RemoteObject, "Project"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("title"), new objj_ivar("notes"), new objj_ivar("requests")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("title"), function $Project__title(self, _cmd)
 {
@@ -754,7 +755,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("title"), function $Requ
 }
 ,["void","WLRemoteAction"]), new objj_method(sel_getUid("validateUserInterfaceItem:"), function $Request__validateUserInterfaceItem_(self, _cmd, item)
 {
-    debugger;
 }
 ,["bool","id"])]);
 class_addMethods(meta_class, [new objj_method(sel_getUid("automaticallyLoadsRemoteObjectsForProject"), function $Request__automaticallyLoadsRemoteObjectsForProject(self, _cmd)
@@ -791,31 +791,41 @@ var meta_class = the_class.isa;class_addMethods(meta_class, [new objj_method(sel
     return [['pk', 'url'], ['title', 'title'], ['notes', 'notes'], ['project', 'project', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", Project)], ['requester', 'requester', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", User)], ['requestee', 'requestee', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", User)], ['status', 'status'], ['possibleActions', 'possible_actions'], ['allowedActions', 'allowed_actions']];
 }
 ,["CPArray"])]);
-}p;19;ProjectController.jt;7874;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;9;Project.ji;8;UIIcon.ji;10;UserList.ji;18;RequestGraphView.jt;7721;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("Project.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("UserList.j", YES);objj_executeFile("RequestGraphView.j", YES);{var the_class = objj_allocateClassPair(USViewController, "ProjectController"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_projectButtonBar"), new objj_ivar("_requestButtonBar"), new objj_ivar("_requestArrayController"), new objj_ivar("_usersController"), new objj_ivar("_projectsSplitView"), new objj_ivar("_requestsSplitView"), new objj_ivar("_requestGraphView")]);objj_registerClassPair(the_class);
-class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), function $ProjectController__awakeFromCib(self, _cmd)
+}p;19;ProjectController.jt;11341;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;9;Project.ji;8;UIIcon.ji;10;UserList.ji;18;RequestGraphView.jt;11187;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("Project.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("UserList.j", YES);objj_executeFile("RequestGraphView.j", YES);{var the_class = objj_allocateClassPair(USViewController, "ProjectController"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_projectButtonBar"), new objj_ivar("_requestButtonBar"), new objj_ivar("_requestArrayController"), new objj_ivar("_usersController"), new objj_ivar("_projectsSplitView"), new objj_ivar("_requestsSplitView"), new objj_ivar("_requestGraphView"), new objj_ivar("_projectPredicateEditorPanel"), new objj_ivar("_projectFilterPredicate"), new objj_ivar("_requestPredicateEditorPanel"), new objj_ivar("_requestFilterPredicate")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("projectFilterPredicate"), function $ProjectController__projectFilterPredicate(self, _cmd)
+{
+    return self._projectFilterPredicate;
+}
+,["CPPredicate"]), new objj_method(sel_getUid("setProjectFilterPredicate:"), function $ProjectController__setProjectFilterPredicate_(self, _cmd, newValue)
+{
+    self._projectFilterPredicate = newValue;
+}
+,["void","CPPredicate"]), new objj_method(sel_getUid("requestFilterPredicate"), function $ProjectController__requestFilterPredicate(self, _cmd)
+{
+    return self._requestFilterPredicate;
+}
+,["CPPredicate"]), new objj_method(sel_getUid("setRequestFilterPredicate:"), function $ProjectController__setRequestFilterPredicate_(self, _cmd, newValue)
+{
+    self._requestFilterPredicate = newValue;
+}
+,["void","CPPredicate"]), new objj_method(sel_getUid("awakeFromCib"), function $ProjectController__awakeFromCib(self, _cmd)
 {
     objj_msgSendSuper({ receiver:self, super_class:objj_getClass("ProjectController").super_class }, "awakeFromCib");
     ((___r1 = ((___r2 = UserList.isa.objj_msgSend0(UserList, "alloc")), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "init"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "fetchAll:", self));
-    var addButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "plusButton");
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setAction:", sel_getUid("addProject:")));
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setTarget:", self));
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setEnabled:", YES));
-    var minusButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "minusButton");
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setAction:", sel_getUid("removeProject:")));
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setTarget:", self));
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setEnabled:", YES));
-    ((___r1 = self._projectButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton]));
+    var addButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "plus.png", sel_getUid("addProject:")),
+        minusButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "minus.png", sel_getUid("removeProject:")),
+        searchButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "funnel--pencil.png", sel_getUid("showProjectPredicateEditor:")),
+        resetButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "funnel--minus.png", sel_getUid("resetProjectPredicate:")),
+        historyButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "history.png", sel_getUid("showProjectHistory:"));
+    ((___r1 = self._projectButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton, searchButton, resetButton, historyButton]));
     ((___r1 = self._projectButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHasResizeControl:", NO));
-    addButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "plusButton");
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setAction:", sel_getUid("addRequest:")));
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setTarget:", self));
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setEnabled:", YES));
-    minusButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "minusButton");
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setAction:", sel_getUid("removeRequest:")));
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setTarget:", self));
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setEnabled:", YES));
-    ((___r1 = self._requestButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton]));
+    var addButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "plus.png", sel_getUid("addRequest:")),
+        minusButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "minus.png", sel_getUid("removeRequest:")),
+        searchButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "funnel--pencil.png", sel_getUid("showRequestPredicateEditor:")),
+        resetButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "funnel--minus.png", sel_getUid("resetRequestPredicate:")),
+        historyButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "history.png", sel_getUid("showRequestHistory:"));
+    ((___r1 = self._requestButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton, searchButton, resetButton, historyButton]));
     ((___r1 = self._requestButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHasResizeControl:", NO));
     ((___r1 = self._requestGraphView), ___r1 == null ? null : ___r1.isa.objj_msgSend(___r1, "bind:toObject:withKeyPath:options:", "status", self._requestArrayController, "selection.status", nil));
     var ___r1, ___r2;
@@ -828,11 +838,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
 {
     return "Projects";
 }
-,["CPString"]), new objj_method(sel_getUid("defaultPredicate"), function $ProjectController__defaultPredicate(self, _cmd)
-{
-    return CPPredicate.isa.objj_msgSend1(CPPredicate, "predicateWithFormat:", "title CONTAINS \"\"");
-}
-,["CPPredicate"]), new objj_method(sel_getUid("addProject:"), function $ProjectController__addProject_(self, _cmd, sender)
+,["CPString"]), new objj_method(sel_getUid("addProject:"), function $ProjectController__addProject_(self, _cmd, sender)
 {
     var project = ((___r1 = Project.isa.objj_msgSend0(Project, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
     ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObject:", project));
@@ -862,6 +868,52 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
     ((___r1 = self._requestArrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "removeObject:", request));
     var ___r1, ___r2;
 }
+,["void","id"]), new objj_method(sel_getUid("showProjectHistory:"), function $ProjectController__showProjectHistory_(self, _cmd, sender)
+{
+}
+,["void","id"]), new objj_method(sel_getUid("showProjectPredicateEditor:"), function $ProjectController__showProjectPredicateEditor_(self, _cmd, sender)
+{
+    if (!self._projectFilterPredicate)
+        self.isa.objj_msgSend1(self, "setProjectFilterPredicate:", self.isa.objj_msgSend0(self, "defaultProjectPredicate"));
+    (CPApp == null ? null : CPApp.isa.objj_msgSend(CPApp, "beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:", self._projectPredicateEditorPanel, (CPApp == null ? null : CPApp.isa.objj_msgSend0(CPApp, "mainWindow")), self, nil, nil));
+}
+,["void","id"]), new objj_method(sel_getUid("resetProjectPredicate:"), function $ProjectController__resetProjectPredicate_(self, _cmd, sender)
+{
+    self.isa.objj_msgSend1(self, "setProjectFilterPredicate:", nil);
+}
+,["void","id"]), new objj_method(sel_getUid("closeProjectPredicateEditor:"), function $ProjectController__closeProjectPredicateEditor_(self, _cmd, sender)
+{
+    (CPApp == null ? null : CPApp.isa.objj_msgSend1(CPApp, "endSheet:", self._projectPredicateEditorPanel));
+    ((___r1 = self._projectPredicateEditorPanel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "orderOut:", sender));
+    var ___r1;
+}
+,["void","id"]), new objj_method(sel_getUid("defaultProjectPredicate"), function $ProjectController__defaultProjectPredicate(self, _cmd)
+{
+    return CPPredicate.isa.objj_msgSend1(CPPredicate, "predicateWithFormat:", "title CONTAINS \"Project\"");
+}
+,["CPPredicate"]), new objj_method(sel_getUid("showRequestPredicateEditor:"), function $ProjectController__showRequestPredicateEditor_(self, _cmd, sender)
+{
+    if (!self._requestFilterPredicate)
+        self.isa.objj_msgSend1(self, "setRequestFilterPredicate:", self.isa.objj_msgSend0(self, "defaultRequestPredicate"));
+    (CPApp == null ? null : CPApp.isa.objj_msgSend(CPApp, "beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:", self._requestPredicateEditorPanel, (CPApp == null ? null : CPApp.isa.objj_msgSend0(CPApp, "mainWindow")), self, nil, nil));
+}
+,["void","id"]), new objj_method(sel_getUid("resetRequestPredicate:"), function $ProjectController__resetRequestPredicate_(self, _cmd, sender)
+{
+    self.isa.objj_msgSend1(self, "setRequestFilterPredicate:", nil);
+}
+,["void","id"]), new objj_method(sel_getUid("closeRequestPredicateEditor:"), function $ProjectController__closeRequestPredicateEditor_(self, _cmd, sender)
+{
+    (CPApp == null ? null : CPApp.isa.objj_msgSend1(CPApp, "endSheet:", self._requestPredicateEditorPanel));
+    ((___r1 = self._requestPredicateEditorPanel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "orderOut:", sender));
+    var ___r1;
+}
+,["void","id"]), new objj_method(sel_getUid("defaultRequestPredicate"), function $ProjectController__defaultRequestPredicate(self, _cmd)
+{
+    return CPPredicate.isa.objj_msgSend1(CPPredicate, "predicateWithFormat:", "title CONTAINS \"Request\"");
+}
+,["CPPredicate"]), new objj_method(sel_getUid("showRequestHistory:"), function $ProjectController__showRequestHistory_(self, _cmd, sender)
+{
+}
 ,["void","id"]), new objj_method(sel_getUid("userListRecievedUsers:"), function $ProjectController__userListRecievedUsers_(self, _cmd, users)
 {
     ((___r1 = self._usersController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObjects:", users));
@@ -869,15 +921,11 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
 }
 ,["void","id"]), new objj_method(sel_getUid("splitView:constrainMinCoordinate:ofSubviewAt:"), function $ProjectController__splitView_constrainMinCoordinate_ofSubviewAt_(self, _cmd, aSplitView, proposedMin, dividerIndex)
 {
-    if ((aSplitView == null ? null : aSplitView.isa.objj_msgSend1(aSplitView, "isEqual:", self._projectsSplitView)))
-        return proposedMin + 50;
-    return proposedMin;
+    return proposedMin + 256;
 }
 ,["float","CPSplitView","float","int"]), new objj_method(sel_getUid("splitView:constrainMaxCoordinate:ofSubviewAt:"), function $ProjectController__splitView_constrainMaxCoordinate_ofSubviewAt_(self, _cmd, aSplitView, proposedMax, dividerIndex)
 {
-    if ((aSplitView == null ? null : aSplitView.isa.objj_msgSend1(aSplitView, "isEqual:", self._projectsSplitView)))
-        return proposedMax - 200;
-    return proposedMax;
+    return proposedMax - 256;
 }
 ,["float","CPSplitView","float","int"])]);
 class_addMethods(meta_class, [new objj_method(sel_getUid("objectClass"), function $ProjectController__objectClass(self, _cmd)
@@ -1441,13 +1489,13 @@ var meta_class = the_class.isa;class_addMethods(the_class, [new objj_method(sel_
     CGContextDrawImage(ctx, dstRect, self);
     var ___r1;
 }
-,["void","CPRect","CPRect","NSCompositingOperation","CGFloat"]), new objj_method(sel_getUid("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), function $CPImage__drawInRect_fromRect_operation_fraction_respectFlipped_hints_(self, _cmd, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
+,["void","CGRect","CGRect","NSCompositingOperation","CGFloat"]), new objj_method(sel_getUid("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), function $CPImage__drawInRect_fromRect_operation_fraction_respectFlipped_hints_(self, _cmd, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
 {
     var ctx = ((___r1 = CPGraphicsContext.isa.objj_msgSend0(CPGraphicsContext, "currentContext")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "graphicsPort"));
     CGContextDrawImage(ctx, dstSpacePortionRect, self);
     var ___r1;
 }
-,["void","CPRect","CPRect","NSCompositingOperation","CGFloat","bool","CPDictionary"])]);
+,["void","CGRect","CGRect","NSCompositingOperation","CGFloat","bool","CPDictionary"])]);
 }p;8;UIIcon.jt;841;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;15;UIIconMapping.jt;755;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("UIIconMapping.j", YES);var CachedIcons = CPMutableDictionary.isa.objj_msgSend0(CPMutableDictionary, "dictionary");
 UIIcon = function(name, width, height)
 {
@@ -1467,7 +1515,7 @@ UIIcon = function(name, width, height)
     return icon;
 }
 p;15;UIIconMapping.jt;51;@STATIC;1.0;t;34;UIIconMapping = {"user": "user"};
-p;6;User.jt;4562;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.jI;33;Foundation/CPUserSessionManager.jt;4462;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);objj_executeFile("Foundation/CPUserSessionManager.j", NO);{var the_class = objj_allocateClassPair(RemoteObject, "User"),
+p;6;User.jt;4548;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.jI;33;Foundation/CPUserSessionManager.jt;4448;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);objj_executeFile("Foundation/CPUserSessionManager.j", NO);{var the_class = objj_allocateClassPair(RemoteObject, "User"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("username"), new objj_ivar("email"), new objj_ivar("manager"), new objj_ivar("password"), new objj_ivar("manager")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("username"), function $User__username(self, _cmd)
 {
@@ -1525,7 +1573,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("username"), function $U
 }
 ,["CPString"]), new objj_method(sel_getUid("remoteActionDidFail:"), function $User__remoteActionDidFail_(self, _cmd, action)
 {
-    debugger;
 }
 ,["void","WLRemoteAction"])]);
 class_addMethods(meta_class, [new objj_method(sel_getUid("remoteProperties"), function $User__remoteProperties(self, _cmd)
@@ -1556,20 +1603,25 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("remoteProperties"), fu
     var ___r1;
 }
 ,["void","WLRemoteAction"])]);
-}p;16;UserController.jt;3776;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;6;User.ji;8;UIIcon.ji;26;PasswordChangeController.jt;3633;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("User.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("PasswordChangeController.j", YES);{var the_class = objj_allocateClassPair(USViewController, "UserController"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_buttonBar")]);objj_registerClassPair(the_class);
-class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), function $UserController__awakeFromCib(self, _cmd)
+}p;16;UserController.jt;5319;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;6;User.ji;8;UIIcon.ji;26;PasswordChangeController.jt;5176;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("User.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("PasswordChangeController.j", YES);{var the_class = objj_allocateClassPair(USViewController, "UserController"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_buttonBar"), new objj_ivar("_predicateEditorPanel"), new objj_ivar("_filterPredicate")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("filterPredicate"), function $UserController__filterPredicate(self, _cmd)
+{
+    return self._filterPredicate;
+}
+,["CPPredicate"]), new objj_method(sel_getUid("setFilterPredicate:"), function $UserController__setFilterPredicate_(self, _cmd, newValue)
+{
+    self._filterPredicate = newValue;
+}
+,["void","CPPredicate"]), new objj_method(sel_getUid("awakeFromCib"), function $UserController__awakeFromCib(self, _cmd)
 {
     objj_msgSendSuper({ receiver:self, super_class:objj_getClass("UserController").super_class }, "awakeFromCib");
-    var addButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "plusButton");
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setAction:", sel_getUid("addObject:")));
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setTarget:", self));
-    (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setEnabled:", YES));
-    var minusButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "minusButton");
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setAction:", sel_getUid("removeObject:")));
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setTarget:", self));
-    (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setEnabled:", YES));
-    ((___r1 = self._buttonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton]));
+    var addButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "plus.png", sel_getUid("addObject:")),
+        minusButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "minus.png", sel_getUid("removeObject:")),
+        searchButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "funnel--pencil.png", sel_getUid("showPredicateEditor:")),
+        resetButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "funnel--minus.png", sel_getUid("resetPredicate:")),
+        historyButton = self.isa.objj_msgSend2(self, "buttonWithImage:action:", "history.png", sel_getUid("showHistory:"));
+    ((___r1 = self._buttonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton, searchButton, resetButton, historyButton]));
     ((___r1 = self._buttonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHasResizeControl:", NO));
     var ___r1;
 }
@@ -1581,9 +1633,25 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
 {
     return "Users";
 }
-,["CPString"]), new objj_method(sel_getUid("defaultPredicate"), function $UserController__defaultPredicate(self, _cmd)
+,["CPString"]), new objj_method(sel_getUid("showPredicateEditor:"), function $UserController__showPredicateEditor_(self, _cmd, sender)
 {
-    return CPPredicate.isa.objj_msgSend1(CPPredicate, "predicateWithFormat:", "email CONTAINS \"\"");
+    if (!self._filterPredicate)
+        self.isa.objj_msgSend1(self, "setFilterPredicate:", self.isa.objj_msgSend0(self, "defaultPredicate"));
+    (CPApp == null ? null : CPApp.isa.objj_msgSend(CPApp, "beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:", self._predicateEditorPanel, (CPApp == null ? null : CPApp.isa.objj_msgSend0(CPApp, "mainWindow")), self, nil, nil));
+}
+,["void","id"]), new objj_method(sel_getUid("resetPredicate:"), function $UserController__resetPredicate_(self, _cmd, sender)
+{
+    self.isa.objj_msgSend1(self, "setFilterPredicate:", nil);
+}
+,["void","id"]), new objj_method(sel_getUid("closePredicateEditor:"), function $UserController__closePredicateEditor_(self, _cmd, sender)
+{
+    (CPApp == null ? null : CPApp.isa.objj_msgSend1(CPApp, "endSheet:", self._predicateEditorPanel));
+    ((___r1 = self._predicateEditorPanel), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "orderOut:", sender));
+    var ___r1;
+}
+,["void","id"]), new objj_method(sel_getUid("defaultPredicate"), function $UserController__defaultPredicate(self, _cmd)
+{
+    return CPPredicate.isa.objj_msgSend1(CPPredicate, "predicateWithFormat:", "email CONTAINS \"domain\"");
 }
 ,["CPPredicate"]), new objj_method(sel_getUid("changeUserPassword:"), function $UserController__changeUserPassword_(self, _cmd, sender)
 {
@@ -1591,6 +1659,9 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
     (passwordChangeController == null ? null : passwordChangeController.isa.objj_msgSend1(passwordChangeController, "setUser:", ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "selection"))));
     (CPApp == null ? null : CPApp.isa.objj_msgSend(CPApp, "beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:", (passwordChangeController == null ? null : passwordChangeController.isa.objj_msgSend0(passwordChangeController, "window")), (CPApp == null ? null : CPApp.isa.objj_msgSend0(CPApp, "mainWindow")), self, nil, nil));
     var ___r1;
+}
+,["void","id"]), new objj_method(sel_getUid("showHistory:"), function $UserController__showHistory_(self, _cmd, sender)
+{
 }
 ,["void","id"]), new objj_method(sel_getUid("debug"), function $UserController__debug(self, _cmd)
 {
@@ -1617,7 +1688,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("fetchAll:"), function $
     var ___r1;
 }
 ,["void","WLRemoteAction"])]);
-}p;20;UserSessionManager.jt;9685;@STATIC;1.0;I;21;Foundation/CPObject.jI;28;Foundation/CPURLConnection.jI;33;Foundation/CPUserSessionManager.ji;17;LoginController.ji;6;User.jt;9537;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPURLConnection.j", NO);objj_executeFile("Foundation/CPUserSessionManager.j", NO);objj_executeFile("LoginController.j", YES);objj_executeFile("User.j", YES);var DefaultSessionManager = nil;
+}p;20;UserSessionManager.jt;9748;@STATIC;1.0;I;21;Foundation/CPObject.jI;28;Foundation/CPURLConnection.jI;33;Foundation/CPUserSessionManager.ji;17;LoginController.ji;6;User.jt;9600;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPURLConnection.j", NO);objj_executeFile("Foundation/CPUserSessionManager.j", NO);objj_executeFile("LoginController.j", YES);objj_executeFile("User.j", YES);var DefaultSessionManager = nil;
 {var the_class = objj_allocateClassPair(CPUserSessionManager, "UserSessionManager"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_loginDelegate"), new objj_ivar("_loginProvider"), new objj_ivar("_loginConnection"), new objj_ivar("_logoutConnection"), new objj_ivar("_authenticationToken")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), function $UserSessionManager__loginProvider(self, _cmd)
@@ -1666,6 +1737,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
     if (returnCode === LoginSucceeded)
     {
         self._authenticationToken = ((___r1 = self._loginProvider), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "authenticationToken"));
+        CPLog.debug("Got Token " + self._authenticationToken);
         selectorToPerform = sel_getUid("loginDidSucceed:");
     }
     else
@@ -1755,128 +1827,11 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("defaultManager"), func
 }
 ,["UserSessionManager"])]);
 }CPURLConnection.isa.objj_msgSend1(CPURLConnection, "setClassDelegate:", UserSessionManager.isa.objj_msgSend0(UserSessionManager, "defaultManager"));
-p;18;USViewController.jt;11275;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;6;User.ji;19;ZxcvbnTransformer.jt;11173;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("User.j", YES);objj_executeFile("ZxcvbnTransformer.j", YES);{var the_class = objj_allocateClassPair(CPViewController, "USViewController"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_arrayController"), new objj_ivar("_mainContentView"), new objj_ivar("_tableView"), new objj_ivar("_predicateEditorView"), new objj_ivar("_filterPredicate"), new objj_ivar("_inspectorWindow")]);objj_registerClassPair(the_class);
-class_addMethods(the_class, [new objj_method(sel_getUid("filterPredicate"), function $USViewController__filterPredicate(self, _cmd)
+p;18;USViewController.jt;4506;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;6;User.ji;19;ZxcvbnTransformer.jt;4405;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("User.j", YES);objj_executeFile("ZxcvbnTransformer.j", YES);{var the_class = objj_allocateClassPair(CPViewController, "USViewController"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_arrayController"), new objj_ivar("_mainContentView")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), function $USViewController__awakeFromCib(self, _cmd)
 {
-    return self._filterPredicate;
-}
-,["CPPredicate"]), new objj_method(sel_getUid("setFilterPredicate:"), function $USViewController__setFilterPredicate_(self, _cmd, newValue)
-{
-    self._filterPredicate = newValue;
-}
-,["void","CPPredicate"]), new objj_method(sel_getUid("awakeFromCib"), function $USViewController__awakeFromCib(self, _cmd)
-{
-    ((___r1 = self._predicateEditorView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
-    self.isa.objj_msgSend0(self, "layoutViews");
-    ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend(___r1, "addObserver:forKeyPath:options:context:", self, "arrangedObjects", CPKeyValueObservingOptionNew | CPKeyValueObservingOptionOld | CPKeyValueObservingOptionPrior, NULL));
-    ((___r1 = self._tableView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setTarget:", self));
-    ((___r1 = self._tableView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setDoubleAction:", sel_getUid("showInspector:")));
     self.isa.objj_msgSend0(self, "fetchAll");
-    var ___r1;
-}
-,["void"]), new objj_method(sel_getUid("observeValueForKeyPath:ofObject:change:context:"), function $USViewController__observeValueForKeyPath_ofObject_change_context_(self, _cmd, keyPath, object, change, context)
-{
-    if ([(object == null ? null : object.isa.objj_msgSend1(object, "isEqual:", self._arrayController))] && (keyPath == null ? null : keyPath.isa.objj_msgSend1(keyPath, "isEqual:", "arrangedObjects")))
-        if (((___r1 = (change == null ? null : change.isa.objj_msgSend1(change, "objectForKey:", CPKeyValueChangeNotificationIsPriorKey))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "isEqual:", CPNumber.isa.objj_msgSend1(CPNumber, "numberWithBool:", YES))))
-        {
-            self.isa.objj_msgSend1(self, "willChangeValueForKey:", "status");
-        }
-        else
-        {
-            ((___r1 = self._tableView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "deselectColumn:", ((___r2 = self._tableView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "selectedColumn"))));
-            self.isa.objj_msgSend1(self, "didChangeValueForKey:", "status");
-        }
-    var ___r1, ___r2;
-}
-,["void","CPString","id","CPDictionary","void"]), new objj_method(sel_getUid("status"), function $USViewController__status(self, _cmd)
-{
-    if (!self._arrayController || !((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "arrangedObjects")) || ((___r1 = ((___r2 = self._arrayController), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "arrangedObjects"))), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "count")) == 0)
-    {
-        return "No entries";
-    }
-    return CPString.isa.objj_msgSend2(CPString, "stringWithFormat:", "%@ Entries", ((___r1 = ((___r2 = self._arrayController), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "arrangedObjects"))), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "count")));
-    var ___r1, ___r2;
-}
-,["CPString"]), new objj_method(sel_getUid("inspectorIsVisible"), function $USViewController__inspectorIsVisible(self, _cmd)
-{
-    return ((___r1 = self._inspectorWindow), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "isVisible"));
-    var ___r1;
-}
-,["BOOL"]), new objj_method(sel_getUid("toggleInspector:"), function $USViewController__toggleInspector_(self, _cmd, sender)
-{
-    if (self.isa.objj_msgSend0(self, "inspectorIsVisible"))
-        self.isa.objj_msgSend1(self, "hideInspector:", self);
-    else
-        self.isa.objj_msgSend1(self, "showInspector:", self);
-}
-,["void","id"]), new objj_method(sel_getUid("hideInspector:"), function $USViewController__hideInspector_(self, _cmd, sender)
-{
-    if (self.isa.objj_msgSend0(self, "inspectorIsVisible"))
-        ((___r1 = self._inspectorWindow), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "orderOut:", self));
-    var ___r1;
-}
-,["void","id"]), new objj_method(sel_getUid("showInspector:"), function $USViewController__showInspector_(self, _cmd, sender)
-{
-    if (!self.isa.objj_msgSend0(self, "inspectorIsVisible"))
-        ((___r1 = self._inspectorWindow), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "orderFront:", self));
-    var ___r1;
-}
-,["void","id"]), new objj_method(sel_getUid("predicateEditorIsVisible"), function $USViewController__predicateEditorIsVisible(self, _cmd)
-{
-    return !((___r1 = self._predicateEditorView), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "isHidden"));
-    var ___r1;
-}
-,["BOOL"]), new objj_method(sel_getUid("togglePredicateEditor:"), function $USViewController__togglePredicateEditor_(self, _cmd, sender)
-{
-    if (self.isa.objj_msgSend0(self, "predicateEditorIsVisible"))
-        self.isa.objj_msgSend1(self, "hidePredicateEditor:", self);
-    else
-        self.isa.objj_msgSend1(self, "showPredicateEditor:", self);
-}
-,["void","id"]), new objj_method(sel_getUid("hidePredicateEditor:"), function $USViewController__hidePredicateEditor_(self, _cmd, sender)
-{
-    if (self.isa.objj_msgSend0(self, "predicateEditorIsVisible"))
-    {
-        ((___r1 = self._predicateEditorView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", YES));
-        self.isa.objj_msgSend0(self, "layoutViews");
-    }
-    var ___r1;
-}
-,["void","id"]), new objj_method(sel_getUid("showPredicateEditor:"), function $USViewController__showPredicateEditor_(self, _cmd, sender)
-{
-    if (!self._filterPredicate)
-        self.isa.objj_msgSend1(self, "setFilterPredicate:", self.isa.objj_msgSend0(self, "defaultPredicate"));
-    if (!self.isa.objj_msgSend0(self, "predicateEditorIsVisible"))
-    {
-        ((___r1 = self._predicateEditorView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHidden:", NO));
-        self.isa.objj_msgSend0(self, "layoutViews");
-    }
-    var ___r1;
-}
-,["void","id"]), new objj_method(sel_getUid("ruleEditorRowsDidChange:"), function $USViewController__ruleEditorRowsDidChange_(self, _cmd, notification)
-{
-    self.isa.objj_msgSend0(self, "layoutViews");
-}
-,["void","CPNotification"]), new objj_method(sel_getUid("layoutViews"), function $USViewController__layoutViews(self, _cmd)
-{
-    var view = self.isa.objj_msgSend0(self, "view"),
-        bounds = (view == null ? null : view.isa.objj_msgSend0(view, "bounds")),
-        tableScrollView = ((___r1 = ((___r2 = self._tableView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "superview"))), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "superview"));
-    if (self._predicateEditorView)
-    {
-        var predicateHeight = self.isa.objj_msgSend0(self, "predicateEditorIsVisible") ? ((___r1 = self._predicateEditorView), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "bounds")).size.height : 0,
-            predicateScrollView = ((___r1 = ((___r2 = self._predicateEditorView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "superview"))), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "superview"));
-        var tableFrame = CGRectMake(bounds.origin.x, predicateHeight, bounds.size.width, bounds.size.height - predicateHeight);
-        ((___r1 = self._mainContentView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setFrame:", tableFrame));
-        var predicateEditorFrame = CGRectMake(0, 0, bounds.size.width, predicateHeight);
-        (predicateScrollView == null ? null : predicateScrollView.isa.objj_msgSend1(predicateScrollView, "setFrame:", predicateEditorFrame));
-    }
-    else
-    {
-        (tableScrollView == null ? null : tableScrollView.isa.objj_msgSend1(tableScrollView, "setFrame:", bounds));
-    }
-    var ___r1, ___r2;
 }
 ,["void"]), new objj_method(sel_getUid("fetchAll"), function $USViewController__fetchAll(self, _cmd)
 {
@@ -1898,7 +1853,20 @@ class_addMethods(the_class, [new objj_method(sel_getUid("filterPredicate"), func
     ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "removeObject:", object));
     var ___r1, ___r2;
 }
-,["void","id"]), new objj_method(sel_getUid("remoteActionDidFinish:"), function $USViewController__remoteActionDidFinish_(self, _cmd, anAction)
+,["void","id"]), new objj_method(sel_getUid("buttonWithImage:action:"), function $USViewController__buttonWithImage_action_(self, _cmd, imageName, selector)
+{
+    var button = ((___r1 = CPButton.isa.objj_msgSend0(CPButton, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithFrame:", CGRectMake(0, 0, 35, 25))),
+        image = CPImageInBundle(imageName);
+    (button == null ? null : button.isa.objj_msgSend1(button, "setBordered:", NO));
+    (button == null ? null : button.isa.objj_msgSend1(button, "setImage:", image));
+    (button == null ? null : button.isa.objj_msgSend1(button, "setImagePosition:", CPImageOnly));
+    (button == null ? null : button.isa.objj_msgSend1(button, "setAction:", selector));
+    (button == null ? null : button.isa.objj_msgSend1(button, "setTarget:", self));
+    (button == null ? null : button.isa.objj_msgSend1(button, "setEnabled:", YES));
+    return button;
+    var ___r1;
+}
+,["CPButton","CPString","SEL"]), new objj_method(sel_getUid("remoteActionDidFinish:"), function $USViewController__remoteActionDidFinish_(self, _cmd, anAction)
 {
     var objectClass = ((___r1 = self.isa.objj_msgSend0(self, "class")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "objectClass")),
         objects = (objectClass == null ? null : objectClass.isa.objj_msgSend1(objectClass, "objectsFromJson:", (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "result"))));
