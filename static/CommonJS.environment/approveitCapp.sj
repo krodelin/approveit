@@ -1,4 +1,4 @@
-@STATIC;1.0;p;15;AppController.jt;15502;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;20;UserSessionManager.ji;16;UserController.ji;19;ProjectController.jt;15364;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("UserSessionManager.j", YES);objj_executeFile("UserController.j", YES);objj_executeFile("ProjectController.j", YES);var LogoutTimeout = 10,
+@STATIC;1.0;p;15;AppController.jt;16687;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;20;UserSessionManager.ji;16;UserController.ji;19;ProjectController.jt;16549;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("UserSessionManager.j", YES);objj_executeFile("UserController.j", YES);objj_executeFile("ProjectController.j", YES);var LogoutTimeout = 10,
     LogoutCountdownMessage = "If you do nothing, you will be logged out automatically in %@ seconds.";
 {var the_class = objj_allocateClassPair(CPObject, "AppController"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("theWindow"), new objj_ivar("_outlineView"), new objj_ivar("_contentView"), new objj_ivar("_activeController"), new objj_ivar("_sources")]);objj_registerClassPair(the_class);
@@ -109,6 +109,8 @@ class_addMethods(the_class, [new objj_method(sel_getUid("sources"), function $Ap
 ,["BOOL","CPOutlineView","id"]), new objj_method(sel_getUid("outlineViewSelectionDidChange:"), function $AppController__outlineViewSelectionDidChange_(self, _cmd, notification)
 {
     var newController = ((___r1 = self._outlineView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "itemAtRow:", ((___r2 = self._outlineView), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "selectedRow"))));
+    if (!newController)
+        return;
     if ((newController == null ? null : newController.isa.objj_msgSend1(newController, "isEqual:", self._activeController)))
         return;
     self.isa.objj_msgSend1(self, "willChangeValueForKey:", "mainContentController");
@@ -193,7 +195,24 @@ class_addMethods(the_class, [new objj_method(sel_getUid("sources"), function $Ap
 ,["void","UserManager"]), new objj_method(sel_getUid("logoutDidFail:"), function $AppController__logoutDidFail_(self, _cmd, userManager)
 {
 }
-,["void","UserManager"])]);
+,["void","UserManager"]), new objj_method(sel_getUid("splitView:constrainMinCoordinate:ofSubviewAt:"), function $AppController__splitView_constrainMinCoordinate_ofSubviewAt_(self, _cmd, aSplitView, proposedMin, dividerIndex)
+{
+    return 160;
+}
+,["float","CPSplitView","float","int"]), new objj_method(sel_getUid("splitView:constrainMaxCoordinate:ofSubviewAt:"), function $AppController__splitView_constrainMaxCoordinate_ofSubviewAt_(self, _cmd, aSplitView, proposedMax, dividerIndex)
+{
+    return 200;
+}
+,["float","CPSplitView","float","int"]), new objj_method(sel_getUid("splitView:canCollapseSubview:"), function $AppController__splitView_canCollapseSubview_(self, _cmd, aSplitView, aSubview)
+{
+    return YES;
+}
+,["BOOL","CPSplitView","CPView"]), new objj_method(sel_getUid("splitView:shouldCollapseSubview:forDoubleClickOnDividerAtIndex:"), function $AppController__splitView_shouldCollapseSubview_forDoubleClickOnDividerAtIndex_(self, _cmd, aSplitView, aSubview, indexOfDivider)
+{
+    return ((___r1 = self._outlineView), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "isDescendantOf:", aSubview));
+    var ___r1;
+}
+,["BOOL","CPSplitView","CPView","int"])]);
 }p;18;EKShakeAnimation.jt;3060;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;2993;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);{var the_typedef = objj_allocateTypeDef("CG");
 objj_registerTypeDef(the_typedef);
 }{var the_class = objj_allocateClassPair(CPObject, "EKShakeAnimation"),
@@ -506,7 +525,7 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("keyPathsForValuesAffec
     return CPSet.isa.objj_msgSend3(CPSet, "setWithObjects:", "password", "confirm", nil);
 }
 ,["CPSet"])]);
-}p;9;Project.jt;4576;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.jt;4514;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);{var the_class = objj_allocateClassPair(RemoteObject, "Project"),
+}p;9;Project.jt;13029;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.ji;6;User.jt;12956;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);objj_executeFile("User.j", YES);{var the_class = objj_allocateClassPair(RemoteObject, "Project"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("title"), new objj_ivar("notes"), new objj_ivar("requests")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("title"), function $Project__title(self, _cmd)
 {
@@ -552,7 +571,7 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("automaticallyLoadsRemo
 }
 ,["CPString"])]);
 }{var the_class = objj_allocateClassPair(RemoteObject, "Request"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("title"), new objj_ivar("notes"), new objj_ivar("project")]);objj_registerClassPair(the_class);
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("title"), new objj_ivar("notes"), new objj_ivar("project"), new objj_ivar("requester"), new objj_ivar("requestee"), new objj_ivar("status"), new objj_ivar("possibleActions"), new objj_ivar("allowedActions")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("title"), function $Request__title(self, _cmd)
 {
     return self.title;
@@ -577,16 +596,167 @@ class_addMethods(the_class, [new objj_method(sel_getUid("title"), function $Requ
 {
     self.project = newValue;
 }
-,["void","Project"]), new objj_method(sel_getUid("init"), function $Request__init(self, _cmd)
+,["void","Project"]), new objj_method(sel_getUid("requester"), function $Request__requester(self, _cmd)
+{
+    return self.requester;
+}
+,["User"]), new objj_method(sel_getUid("setRequester:"), function $Request__setRequester_(self, _cmd, newValue)
+{
+    self.requester = newValue;
+}
+,["void","User"]), new objj_method(sel_getUid("requestee"), function $Request__requestee(self, _cmd)
+{
+    return self.requestee;
+}
+,["User"]), new objj_method(sel_getUid("setRequestee:"), function $Request__setRequestee_(self, _cmd, newValue)
+{
+    self.requestee = newValue;
+}
+,["void","User"]), new objj_method(sel_getUid("status"), function $Request__status(self, _cmd)
+{
+    return self.status;
+}
+,["CPString"]), new objj_method(sel_getUid("setStatus:"), function $Request__setStatus_(self, _cmd, newValue)
+{
+    self.status = newValue;
+}
+,["void","CPString"]), new objj_method(sel_getUid("possibleActions"), function $Request__possibleActions(self, _cmd)
+{
+    return self.possibleActions;
+}
+,["CPArray"]), new objj_method(sel_getUid("allowedActions"), function $Request__allowedActions(self, _cmd)
+{
+    return self.allowedActions;
+}
+,["CPArray"]), new objj_method(sel_getUid("init"), function $Request__init(self, _cmd)
 {
     if (self = objj_msgSendSuper({ receiver:self, super_class:objj_getClass("Request").super_class }, "init"))
     {
         self.title = "New Request";
         self.notes = "Notes";
+        self.requester = User.isa.objj_msgSend0(User, "current");
+        self.requestee = User.isa.objj_msgSend0(User, "current");
     }
     return self;
 }
-,["id"])]);
+,["id"]), new objj_method(sel_getUid("action:"), function $Request__action_(self, _cmd, actionName)
+{
+    WLRemoteAction.isa.objj_msgSend(WLRemoteAction, "schedule:path:delegate:message:", WLRemoteActionPostType, self.isa.objj_msgSend0(self, "remotePath") + actionName + "/", self, actionName + "Action");
+}
+,["void","CPString"]), new objj_method(sel_getUid("allowed:"), function $Request__allowed_(self, _cmd, actionName)
+{
+    return ((___r1 = self.allowedActions), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "containsObject:", actionName));
+    var ___r1;
+}
+,["bool","CPString"]), new objj_method(sel_getUid("possible:"), function $Request__possible_(self, _cmd, actionName)
+{
+    return ((___r1 = self.allowedActions), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "containsObject:", actionName));
+    var ___r1;
+}
+,["bool","CPString"]), new objj_method(sel_getUid("approve"), function $Request__approve(self, _cmd)
+{
+    self.isa.objj_msgSend1(self, "action:", 'approve');
+}
+,["void"]), new objj_method(sel_getUid("isApproveAllowed"), function $Request__isApproveAllowed(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "allowed:", 'approve');
+}
+,["bool"]), new objj_method(sel_getUid("isApprovePossible"), function $Request__isApprovePossible(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "possible:", 'approve');
+}
+,["bool"]), new objj_method(sel_getUid("reject"), function $Request__reject(self, _cmd)
+{
+    self.isa.objj_msgSend1(self, "action:", 'reject');
+}
+,["void"]), new objj_method(sel_getUid("isRejectAllowed"), function $Request__isRejectAllowed(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "allowed:", 'reject');
+}
+,["bool"]), new objj_method(sel_getUid("isRejectPossible"), function $Request__isRejectPossible(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "possible:", 'reject');
+}
+,["bool"]), new objj_method(sel_getUid("request"), function $Request__request(self, _cmd)
+{
+    self.isa.objj_msgSend1(self, "action:", 'request');
+}
+,["void"]), new objj_method(sel_getUid("isRequestAllowed"), function $Request__isRequestAllowed(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "allowed:", 'request');
+}
+,["bool"]), new objj_method(sel_getUid("isRequestPossible"), function $Request__isRequestPossible(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "possible:", 'request');
+}
+,["bool"]), new objj_method(sel_getUid("provide"), function $Request__provide(self, _cmd)
+{
+    self.isa.objj_msgSend1(self, "action:", 'provide');
+}
+,["void"]), new objj_method(sel_getUid("isProvideAllowed"), function $Request__isProvideAllowed(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "allowed:", 'provide');
+}
+,["bool"]), new objj_method(sel_getUid("isProvidePossible"), function $Request__isProvidePossible(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "possible:", 'provide');
+}
+,["bool"]), new objj_method(sel_getUid("finish"), function $Request__finish(self, _cmd)
+{
+    self.isa.objj_msgSend1(self, "action:", 'finish');
+}
+,["void"]), new objj_method(sel_getUid("isFinishAllowed"), function $Request__isFinishAllowed(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "allowed:", 'finish');
+}
+,["bool"]), new objj_method(sel_getUid("isFinishPossible"), function $Request__isFinishPossible(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "possible:", 'finish');
+}
+,["bool"]), new objj_method(sel_getUid("reopen"), function $Request__reopen(self, _cmd)
+{
+    self.isa.objj_msgSend1(self, "action:", 'reopen');
+}
+,["void"]), new objj_method(sel_getUid("isReopenAllowed"), function $Request__isReopenAllowed(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "allowed:", 'reopen');
+}
+,["bool"]), new objj_method(sel_getUid("isReopenPossible"), function $Request__isReopenPossible(self, _cmd)
+{
+    return self.isa.objj_msgSend1(self, "possible:", 'reopen');
+}
+,["bool"]), new objj_method(sel_getUid("remoteActionDidFinish:"), function $Request__remoteActionDidFinish_(self, _cmd, anAction)
+{
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "status");
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "isApproveAllowed");
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "isRejectAllowed");
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "isRequestAllowed");
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "isProvideAllowed");
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "isFinishAllowed");
+    self.isa.objj_msgSend1(self, "willChangeValueForKey:", "isReopenAllowed");
+    objj_msgSendSuper({ receiver:self, super_class:objj_getClass("Request").super_class }, "remoteActionDidFinish:", anAction);
+    var type = (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "type"));
+    if (type == WLRemoteActionPostType || type == WLRemoteActionPutType || type == WLRemoteActionPatchType)
+    {
+        if (((___r1 = (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "message"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "hasSuffix:", "Action")))
+        {
+            self.isa.objj_msgSend1(self, "updateFromJson:", (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "result")));
+        }
+    }
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "status");
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "isApproveAllowed");
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "isRejectAllowed");
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "isRequestAllowed");
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "isProvideAllowed");
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "isFinishAllowed");
+    self.isa.objj_msgSend1(self, "didChangeValueForKey:", "isReopenAllowed");
+    var ___r1;
+}
+,["void","WLRemoteAction"]), new objj_method(sel_getUid("validateUserInterfaceItem:"), function $Request__validateUserInterfaceItem_(self, _cmd, item)
+{
+    debugger;
+}
+,["bool","id"])]);
 class_addMethods(meta_class, [new objj_method(sel_getUid("automaticallyLoadsRemoteObjectsForProject"), function $Request__automaticallyLoadsRemoteObjectsForProject(self, _cmd)
 {
     return YES;
@@ -595,7 +765,16 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("automaticallyLoadsRemo
 {
     return "requests";
 }
-,["CPString"])]);
+,["CPString"]), new objj_method(sel_getUid("keyPathsForValuesAffectingValueForKey:"), function $Request__keyPathsForValuesAffectingValueForKey_(self, _cmd, key)
+{
+    var keyPaths = CPSet.isa.objj_msgSend1(CPSet, "setWithSet:", objj_msgSendSuper({ receiver:self, super_class:objj_getMetaClass("Request").super_class }, "keyPathsForValuesAffectingValueForKey:", key));
+    if ((key == null ? null : key.isa.objj_msgSend1(key, "hasPrefix:", "is")) && (key == null ? null : key.isa.objj_msgSend1(key, "hasSuffix:", "Allowed")))
+    {
+        (keyPaths == null ? null : keyPaths.isa.objj_msgSend1(keyPaths, "addObjectsFromArray:", ["status", "requester", "requestee"]));
+    }
+    return keyPaths;
+}
+,["CPSet","CPString"])]);
 }{
 var the_class = objj_getClass("Project")
 if(!the_class) throw new SyntaxError("*** Could not find definition for class \"Project\"");
@@ -609,14 +788,15 @@ var the_class = objj_getClass("Request")
 if(!the_class) throw new SyntaxError("*** Could not find definition for class \"Request\"");
 var meta_class = the_class.isa;class_addMethods(meta_class, [new objj_method(sel_getUid("remoteProperties"), function $Request__remoteProperties(self, _cmd)
 {
-    return [['pk', 'url'], ['title', 'title'], ['notes', 'notes'], ['project', 'project', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", Project)]];
+    return [['pk', 'url'], ['title', 'title'], ['notes', 'notes'], ['project', 'project', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", Project)], ['requester', 'requester', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", User)], ['requestee', 'requestee', WLForeignObjectByIdTransformer.isa.objj_msgSend1(WLForeignObjectByIdTransformer, "forObjectClass:", User)], ['status', 'status'], ['possibleActions', 'possible_actions'], ['allowedActions', 'allowed_actions']];
 }
 ,["CPArray"])]);
-}p;19;ProjectController.jt;6156;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;9;Project.ji;8;UIIcon.ji;26;PasswordChangeController.jt;6010;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("Project.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("PasswordChangeController.j", YES);{var the_class = objj_allocateClassPair(USViewController, "ProjectController"),
-meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_projectButtonBar"), new objj_ivar("_requestButtonBar"), new objj_ivar("_requestArrayController")]);objj_registerClassPair(the_class);
+}p;19;ProjectController.jt;7874;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;9;Project.ji;8;UIIcon.ji;10;UserList.ji;18;RequestGraphView.jt;7721;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("Project.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("UserList.j", YES);objj_executeFile("RequestGraphView.j", YES);{var the_class = objj_allocateClassPair(USViewController, "ProjectController"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_projectButtonBar"), new objj_ivar("_requestButtonBar"), new objj_ivar("_requestArrayController"), new objj_ivar("_usersController"), new objj_ivar("_projectsSplitView"), new objj_ivar("_requestsSplitView"), new objj_ivar("_requestGraphView")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), function $ProjectController__awakeFromCib(self, _cmd)
 {
     objj_msgSendSuper({ receiver:self, super_class:objj_getClass("ProjectController").super_class }, "awakeFromCib");
+    ((___r1 = ((___r2 = UserList.isa.objj_msgSend0(UserList, "alloc")), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "init"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "fetchAll:", self));
     var addButton = CPButtonBar.isa.objj_msgSend0(CPButtonBar, "plusButton");
     (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setAction:", sel_getUid("addProject:")));
     (addButton == null ? null : addButton.isa.objj_msgSend1(addButton, "setTarget:", self));
@@ -637,7 +817,8 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
     (minusButton == null ? null : minusButton.isa.objj_msgSend1(minusButton, "setEnabled:", YES));
     ((___r1 = self._requestButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setButtons:", [addButton, minusButton]));
     ((___r1 = self._requestButtonBar), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setHasResizeControl:", NO));
-    var ___r1;
+    ((___r1 = self._requestGraphView), ___r1 == null ? null : ___r1.isa.objj_msgSend(___r1, "bind:toObject:withKeyPath:options:", "status", self._requestArrayController, "selection.status", nil));
+    var ___r1, ___r2;
 }
 ,["void"]), new objj_method(sel_getUid("sourceListImage"), function $ProjectController__sourceListImage(self, _cmd)
 {
@@ -681,13 +862,30 @@ class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), functio
     ((___r1 = self._requestArrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "removeObject:", request));
     var ___r1, ___r2;
 }
-,["void","id"])]);
+,["void","id"]), new objj_method(sel_getUid("userListRecievedUsers:"), function $ProjectController__userListRecievedUsers_(self, _cmd, users)
+{
+    ((___r1 = self._usersController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObjects:", users));
+    var ___r1;
+}
+,["void","id"]), new objj_method(sel_getUid("splitView:constrainMinCoordinate:ofSubviewAt:"), function $ProjectController__splitView_constrainMinCoordinate_ofSubviewAt_(self, _cmd, aSplitView, proposedMin, dividerIndex)
+{
+    if ((aSplitView == null ? null : aSplitView.isa.objj_msgSend1(aSplitView, "isEqual:", self._projectsSplitView)))
+        return proposedMin + 50;
+    return proposedMin;
+}
+,["float","CPSplitView","float","int"]), new objj_method(sel_getUid("splitView:constrainMaxCoordinate:ofSubviewAt:"), function $ProjectController__splitView_constrainMaxCoordinate_ofSubviewAt_(self, _cmd, aSplitView, proposedMax, dividerIndex)
+{
+    if ((aSplitView == null ? null : aSplitView.isa.objj_msgSend1(aSplitView, "isEqual:", self._projectsSplitView)))
+        return proposedMax - 200;
+    return proposedMax;
+}
+,["float","CPSplitView","float","int"])]);
 class_addMethods(meta_class, [new objj_method(sel_getUid("objectClass"), function $ProjectController__objectClass(self, _cmd)
 {
     return Project;
 }
 ,["class"])]);
-}p;14;RemoteObject.jt;556;@STATIC;1.0;i;19;Ratatosk/Ratatosk.jt;514;objj_executeFile("Ratatosk/Ratatosk.j", YES);{var the_class = objj_allocateClassPair(WLRemoteObject, "RemoteObject"),
+}p;14;RemoteObject.jt;933;@STATIC;1.0;i;19;Ratatosk/Ratatosk.jt;891;objj_executeFile("Ratatosk/Ratatosk.j", YES);{var the_class = objj_allocateClassPair(WLRemoteObject, "RemoteObject"),
 meta_class = the_class.isa;objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("remotePath"), function $RemoteObject__remotePath(self, _cmd)
 {
@@ -701,6 +899,555 @@ class_addMethods(the_class, [new objj_method(sel_getUid("remotePath"), function 
     }
 }
 ,["CPString"])]);
+class_addMethods(meta_class, [new objj_method(sel_getUid("fetchAll:"), function $RemoteObject__fetchAll_(self, _cmd, delegate)
+{
+    var remoteName = self.isa.objj_msgSend0(self, "remoteName");
+    WLRemoteAction.isa.objj_msgSend(WLRemoteAction, "schedule:path:delegate:message:", WLRemoteActionGetType, remoteName, delegate, "Loading all " + remoteName);
+}
+,["void","id"])]);
+}p;18;RequestGraphView.jt;1052;@STATIC;1.0;I;15;AppKit/AppKit.ji;17;RequestStyleKit.jt;992;objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("RequestStyleKit.j", YES);{var the_class = objj_allocateClassPair(CPView, "RequestGraphView"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("status")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("isFlipped"), function $RequestGraphView__isFlipped(self, _cmd)
+{
+    return YES;
+}
+,["BOOL"]), new objj_method(sel_getUid("setStatus:"), function $RequestGraphView__setStatus_(self, _cmd, newStatus)
+{
+    if (!(newStatus == null ? null : newStatus.isa.objj_msgSend1(newStatus, "isEqual:", self.status)))
+    {
+        self.status = newStatus;
+        self.isa.objj_msgSend1(self, "setNeedsDisplay:", YES);
+    }
+}
+,["void","CPString"]), new objj_method(sel_getUid("drawRect:"), function $RequestGraphView__drawRect_(self, _cmd, dirtyRect)
+{
+    RequestStyleKit.isa.objj_msgSend1(RequestStyleKit, "drawGraph_overlayWithStatus:", self.status);
+}
+,["void","CGRect"])]);
+}p;17;RequestStyleKit.jt;53561;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;14;StyleKitMock.jt;53474;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("StyleKitMock.j", YES);{var the_class = objj_allocateClassPair(Nil, "RequestStyleKit"),
+meta_class = the_class.isa;objj_registerClassPair(the_class);
+class_addMethods(meta_class, [new objj_method(sel_getUid("initialize"), function $RequestStyleKit__initialize(self, _cmd)
+{
+}
+,["void"]), new objj_method(sel_getUid("drawGraph_textWithStatus:"), function $RequestStyleKit__drawGraph_textWithStatus_(self, _cmd, status)
+{
+    var current = CPColor.isa.objj_msgSend(CPColor, "colorWithCalibratedRed:green:blue:alpha:", 0.63, 0.785, 0.858, 1),
+        other = CPColor.isa.objj_msgSend(CPColor, "colorWithCalibratedRed:green:blue:alpha:", 0.864, 0.864, 0.864, 1);
+    var pending_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "pending")) ? current : other,
+        approved_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "approved")) ? current : other;
+    var rejected_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "rejected")) ? current : other,
+        waiting_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "waiting")) ? current : other;
+    var finished_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "finished")) ? current : other;
+{
+    var oval2Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(6.54, 94.05, 106.92, 47.99));
+    (pending_color == null ? null : pending_color.isa.objj_msgSend0(pending_color, "setFill"));
+    (oval2Path == null ? null : oval2Path.isa.objj_msgSend0(oval2Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval2Path == null ? null : oval2Path.isa.objj_msgSend1(oval2Path, "setLineWidth:", 1));
+    (oval2Path == null ? null : oval2Path.isa.objj_msgSend0(oval2Path, "stroke"));
+    var rectangle2Rect = CPMakeRect(-5.32, 94.01, 130.65, 37.33),
+        rectangle2Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle2Style == null ? null : rectangle2Style.isa.objj_msgSend1(rectangle2Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle2FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle2Style, CPParagraphStyleAttributeName);
+    ((___r1 = "pending"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle2Rect, 0, 1), rectangle2FontAttributes));
+}
+{
+    var oval4Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(224.41, 212.68, 119.18, 47.99));
+    (approved_color == null ? null : approved_color.isa.objj_msgSend0(approved_color, "setFill"));
+    (oval4Path == null ? null : oval4Path.isa.objj_msgSend0(oval4Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval4Path == null ? null : oval4Path.isa.objj_msgSend1(oval4Path, "setLineWidth:", 1));
+    (oval4Path == null ? null : oval4Path.isa.objj_msgSend0(oval4Path, "stroke"));
+    var rectangle4Rect = CPMakeRect(209.34, 212.64, 149.31, 37.33),
+        rectangle4Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle4Style == null ? null : rectangle4Style.isa.objj_msgSend1(rectangle4Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle4FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle4Style, CPParagraphStyleAttributeName);
+    ((___r1 = "approved"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle4Rect, 0, 1), rectangle4FontAttributes));
+}
+{
+    var bezier4Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend1(bezier4Path, "moveToPoint:", CPMakePoint(79.91, 140.44)));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend3(bezier4Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 191.36), CPMakePoint(94.41, 156.64), CPMakePoint(115.86, 177.94)));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend3(bezier4Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(216.96, 222.74), CPMakePoint(162.61, 205.44), CPMakePoint(191.42, 215.64)));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend1(bezier4Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend1(bezier4Path, "setLineWidth:", 1));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend0(bezier4Path, "stroke"));
+    var bezier6Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "moveToPoint:", CPMakePoint(215.89, 227.29)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "lineToPoint:", CPMakePoint(229.97, 226.18)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "lineToPoint:", CPMakePoint(218.28, 218.27)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "lineToPoint:", CPMakePoint(215.89, 227.29)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend0(bezier6Path, "closePath"));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend0(bezier6Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "setLineWidth:", 1));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend0(bezier6Path, "stroke"));
+    var rectangle6Rect = CPMakeRect(104.01, 202.65, 130.65, 37.33),
+        rectangle6Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle6Style == null ? null : rectangle6Style.isa.objj_msgSend1(rectangle6Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle6FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle6Style, CPParagraphStyleAttributeName);
+    ((___r1 = "approve"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle6Rect, 0, 1), rectangle6FontAttributes));
+}
+{
+    var oval6Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(230.94, 126.04, 106.12, 47.99));
+    (rejected_color == null ? null : rejected_color.isa.objj_msgSend0(rejected_color, "setFill"));
+    (oval6Path == null ? null : oval6Path.isa.objj_msgSend0(oval6Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval6Path == null ? null : oval6Path.isa.objj_msgSend1(oval6Path, "setLineWidth:", 1));
+    (oval6Path == null ? null : oval6Path.isa.objj_msgSend0(oval6Path, "stroke"));
+    var rectangle8Rect = CPMakeRect(209.34, 126, 149.31, 37.33),
+        rectangle8Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle8Style == null ? null : rectangle8Style.isa.objj_msgSend1(rectangle8Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle8FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle8Style, CPParagraphStyleAttributeName);
+    ((___r1 = "rejected"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle8Rect, 0, 1), rectangle8FontAttributes));
+}
+{
+    var bezier8Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend1(bezier8Path, "moveToPoint:", CPMakePoint(88.8, 138.32)));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend3(bezier8Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 162.03), CPMakePoint(102.94, 147.5), CPMakePoint(120.9, 157.33)));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend3(bezier8Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(223.9, 163.84), CPMakePoint(166.13, 169.3), CPMakePoint(197.48, 167.78)));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend1(bezier8Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend1(bezier8Path, "setLineWidth:", 1));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend0(bezier8Path, "stroke"));
+    var bezier10Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "moveToPoint:", CPMakePoint(224.85, 168.41)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "lineToPoint:", CPMakePoint(237.22, 161.59)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "lineToPoint:", CPMakePoint(223.3, 159.21)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "lineToPoint:", CPMakePoint(224.85, 168.41)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend0(bezier10Path, "closePath"));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend0(bezier10Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "setLineWidth:", 1));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend0(bezier10Path, "stroke"));
+    var rectangle10Rect = CPMakeRect(113.34, 152, 111.98, 37.33),
+        rectangle10Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle10Style == null ? null : rectangle10Style.isa.objj_msgSend1(rectangle10Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle10FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle10Style, CPParagraphStyleAttributeName);
+    ((___r1 = "reject"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle10Rect, 0, 1), rectangle10FontAttributes));
+}
+{
+    var oval8Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(233.47, 51.4, 101.05, 47.99));
+    (waiting_color == null ? null : waiting_color.isa.objj_msgSend0(waiting_color, "setFill"));
+    (oval8Path == null ? null : oval8Path.isa.objj_msgSend0(oval8Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval8Path == null ? null : oval8Path.isa.objj_msgSend1(oval8Path, "setLineWidth:", 1));
+    (oval8Path == null ? null : oval8Path.isa.objj_msgSend0(oval8Path, "stroke"));
+    var rectangle12Rect = CPMakeRect(218.68, 51.36, 130.65, 37.33),
+        rectangle12Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle12Style == null ? null : rectangle12Style.isa.objj_msgSend1(rectangle12Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle12FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle12Style, CPParagraphStyleAttributeName);
+    ((___r1 = "waiting"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle12Rect, 0, 1), rectangle12FontAttributes));
+}
+{
+    var bezier12Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend1(bezier12Path, "moveToPoint:", CPMakePoint(109.91, 108.68)));
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend3(bezier12Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(223.72, 86.75), CPMakePoint(143.42, 102.23), CPMakePoint(188.16, 93.6)));
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend1(bezier12Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend1(bezier12Path, "setLineWidth:", 1));
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend0(bezier12Path, "stroke"));
+    var bezier14Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "moveToPoint:", CPMakePoint(224.64, 91.32)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "lineToPoint:", CPMakePoint(236.85, 84.22)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "lineToPoint:", CPMakePoint(222.88, 82.16)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "lineToPoint:", CPMakePoint(224.64, 91.32)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend0(bezier14Path, "closePath"));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend0(bezier14Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "setLineWidth:", 1));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend0(bezier14Path, "stroke"));
+    var rectangle14Rect = CPMakeRect(104.01, 88.01, 130.65, 37.33),
+        rectangle14Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle14Style == null ? null : rectangle14Style.isa.objj_msgSend1(rectangle14Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle14FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle14Style, CPParagraphStyleAttributeName);
+    ((___r1 = "request"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle14Rect, 0, 1), rectangle14FontAttributes));
+}
+{
+    var oval10Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(434.94, 44.73, 106.12, 47.99));
+    (finished_color == null ? null : finished_color.isa.objj_msgSend0(finished_color, "setFill"));
+    (oval10Path == null ? null : oval10Path.isa.objj_msgSend0(oval10Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval10Path == null ? null : oval10Path.isa.objj_msgSend1(oval10Path, "setLineWidth:", 1));
+    (oval10Path == null ? null : oval10Path.isa.objj_msgSend0(oval10Path, "stroke"));
+    var rectangle16Rect = CPMakeRect(413.34, 44.69, 149.31, 37.33),
+        rectangle16Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle16Style == null ? null : rectangle16Style.isa.objj_msgSend1(rectangle16Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle16FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle16Style, CPParagraphStyleAttributeName);
+    ((___r1 = "finished"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle16Rect, 0, 1), rectangle16FontAttributes));
+}
+{
+    var bezier16Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend1(bezier16Path, "moveToPoint:", CPMakePoint(311.24, 215.06)));
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend3(bezier16Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(450.86, 98.6), CPMakePoint(346.77, 185.42), CPMakePoint(410.77, 132.04)));
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend1(bezier16Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend1(bezier16Path, "setLineWidth:", 1));
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend0(bezier16Path, "stroke"));
+    var bezier18Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "moveToPoint:", CPMakePoint(454.24, 101.85)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "lineToPoint:", CPMakePoint(461.49, 89.73)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "lineToPoint:", CPMakePoint(448.26, 94.69)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "lineToPoint:", CPMakePoint(454.24, 101.85)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend0(bezier18Path, "closePath"));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend0(bezier18Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "setLineWidth:", 1));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend0(bezier18Path, "stroke"));
+    var rectangle18Rect = CPMakeRect(333.34, 148, 111.98, 37.33),
+        rectangle18Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle18Style == null ? null : rectangle18Style.isa.objj_msgSend1(rectangle18Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle18FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle18Style, CPParagraphStyleAttributeName);
+    ((___r1 = "finish"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle18Rect, 0, 1), rectangle18FontAttributes));
+}
+{
+    var bezier20Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend1(bezier20Path, "moveToPoint:", CPMakePoint(233.4, 142.91)));
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend3(bezier20Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(124.86, 127.23), CPMakePoint(201.4, 138.29), CPMakePoint(159.37, 132.21)));
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend1(bezier20Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend1(bezier20Path, "setLineWidth:", 1));
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend0(bezier20Path, "stroke"));
+    var bezier22Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "moveToPoint:", CPMakePoint(125.42, 122.59)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "lineToPoint:", CPMakePoint(111.56, 125.3)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "lineToPoint:", CPMakePoint(124.09, 131.83)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "lineToPoint:", CPMakePoint(125.42, 122.59)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend0(bezier22Path, "closePath"));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend0(bezier22Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "setLineWidth:", 1));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend0(bezier22Path, "stroke"));
+    var rectangle20Rect = CPMakeRect(113.34, 122.67, 111.98, 37.33),
+        rectangle20Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle20Style == null ? null : rectangle20Style.isa.objj_msgSend1(rectangle20Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle20FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle20Style, CPParagraphStyleAttributeName);
+    ((___r1 = "reopen"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle20Rect, 0, 1), rectangle20FontAttributes));
+}
+{
+    var bezier24Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend1(bezier24Path, "moveToPoint:", CPMakePoint(250.3, 57.44)));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend3(bezier24Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 43.4), CPMakePoint(220.5, 43.4), CPMakePoint(175.47, 28.54)));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend3(bezier24Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(85.68, 84.74), CPMakePoint(117.72, 51.86), CPMakePoint(99.29, 69.01)));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend1(bezier24Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend1(bezier24Path, "setLineWidth:", 1));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend0(bezier24Path, "stroke"));
+    var bezier26Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "moveToPoint:", CPMakePoint(81.89, 82.01)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "lineToPoint:", CPMakePoint(77.06, 95.28)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "lineToPoint:", CPMakePoint(89.11, 87.92)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "lineToPoint:", CPMakePoint(81.89, 82.01)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend0(bezier26Path, "closePath"));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend0(bezier26Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "setLineWidth:", 1));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend0(bezier26Path, "stroke"));
+    var rectangle22Rect = CPMakeRect(104.01, 29.37, 130.65, 37.33),
+        rectangle22Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle22Style == null ? null : rectangle22Style.isa.objj_msgSend1(rectangle22Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle22FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle22Style, CPParagraphStyleAttributeName);
+    ((___r1 = "provide"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle22Rect, 0, 1), rectangle22FontAttributes));
+}
+{
+    var bezier28Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend1(bezier28Path, "moveToPoint:", CPMakePoint(450.03, 51.93)));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend3(bezier28Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 31.4), CPMakePoint(383.61, 24.15), CPMakePoint(240.75, -23.16)));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend3(bezier28Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(83.08, 83.64), CPMakePoint(115.99, 43.53), CPMakePoint(96.71, 65.07)));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend1(bezier28Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend1(bezier28Path, "setLineWidth:", 1));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend0(bezier28Path, "stroke"));
+    var bezier30Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "moveToPoint:", CPMakePoint(79.15, 81.12)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "lineToPoint:", CPMakePoint(75.34, 94.71)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "lineToPoint:", CPMakePoint(86.8, 86.46)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "lineToPoint:", CPMakePoint(79.15, 81.12)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend0(bezier30Path, "closePath"));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend0(bezier30Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "setLineWidth:", 1));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend0(bezier30Path, "stroke"));
+    var rectangle24Rect = CPMakeRect(228.01, 2.71, 111.98, 37.33),
+        rectangle24Style = ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "defaultParagraphStyle")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "mutableCopy"));
+    (rectangle24Style == null ? null : rectangle24Style.isa.objj_msgSend1(rectangle24Style, "set_alignment:", CPCenterTextAlignment));
+    var rectangle24FontAttributes = objj_msgSend(objj_msgSend(CPDictionary, "alloc"), "initWithObjectsAndKeys:", CPFont.isa.objj_msgSend2(CPFont, "fontWithName:size:", "Times-Roman", 18.66), CPFontAttributeName, CPColor.isa.objj_msgSend0(CPColor, "blackColor"), CPForegroundColorAttributeName, rectangle24Style, CPParagraphStyleAttributeName);
+    ((___r1 = "reopen"), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "drawInRect:withAttributes:", CGRectOffset(rectangle24Rect, 0, 1), rectangle24FontAttributes));
+}
+    var ___r1;
+}
+,["void","CPString"]), new objj_method(sel_getUid("drawGraph_overlayWithStatus:"), function $RequestStyleKit__drawGraph_overlayWithStatus_(self, _cmd, status)
+{
+    var current = CPColor.isa.objj_msgSend(CPColor, "colorWithCalibratedRed:green:blue:alpha:", 0.63, 0.785, 0.858, 1),
+        other = CPColor.isa.objj_msgSend(CPColor, "colorWithCalibratedRed:green:blue:alpha:", 0.864, 0.864, 0.864, 1);
+    var graph_rasterized_overlay = CPImageInBundle("graph_rasterized_overlay.png");
+    (graph_rasterized_overlay == null ? null : graph_rasterized_overlay.isa.objj_msgSend1(graph_rasterized_overlay, "setSize:", CPMakeSize(547, 266)));
+    var pending_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "pending")) ? current : other,
+        approved_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "approved")) ? current : other;
+    var rejected_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "rejected")) ? current : other,
+        waiting_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "waiting")) ? current : other;
+    var finished_color = (status == null ? null : status.isa.objj_msgSend1(status, "isEqualToString:", "finished")) ? current : other;
+{
+    var oval2Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(6.54, 123.96, 106.92, 47.99));
+    (pending_color == null ? null : pending_color.isa.objj_msgSend0(pending_color, "setFill"));
+    (oval2Path == null ? null : oval2Path.isa.objj_msgSend0(oval2Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval2Path == null ? null : oval2Path.isa.objj_msgSend1(oval2Path, "setLineWidth:", 1));
+    (oval2Path == null ? null : oval2Path.isa.objj_msgSend0(oval2Path, "stroke"));
+}
+{
+    var oval4Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(224.41, 5.33, 119.18, 47.99));
+    (approved_color == null ? null : approved_color.isa.objj_msgSend0(approved_color, "setFill"));
+    (oval4Path == null ? null : oval4Path.isa.objj_msgSend0(oval4Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval4Path == null ? null : oval4Path.isa.objj_msgSend1(oval4Path, "setLineWidth:", 1));
+    (oval4Path == null ? null : oval4Path.isa.objj_msgSend0(oval4Path, "stroke"));
+}
+{
+    var bezier4Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend1(bezier4Path, "moveToPoint:", CPMakePoint(79.91, 125.56)));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend3(bezier4Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 74.64), CPMakePoint(94.41, 109.36), CPMakePoint(115.86, 88.06)));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend3(bezier4Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(216.96, 43.26), CPMakePoint(162.61, 60.56), CPMakePoint(191.42, 50.36)));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend1(bezier4Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend1(bezier4Path, "setLineWidth:", 1));
+    (bezier4Path == null ? null : bezier4Path.isa.objj_msgSend0(bezier4Path, "stroke"));
+    var bezier6Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "moveToPoint:", CPMakePoint(215.89, 38.71)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "lineToPoint:", CPMakePoint(229.97, 39.82)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "lineToPoint:", CPMakePoint(218.28, 47.73)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "lineToPoint:", CPMakePoint(215.89, 38.71)));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend0(bezier6Path, "closePath"));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend0(bezier6Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend1(bezier6Path, "setLineWidth:", 1));
+    (bezier6Path == null ? null : bezier6Path.isa.objj_msgSend0(bezier6Path, "stroke"));
+}
+{
+    var oval6Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(230.94, 91.97, 106.12, 47.99));
+    (rejected_color == null ? null : rejected_color.isa.objj_msgSend0(rejected_color, "setFill"));
+    (oval6Path == null ? null : oval6Path.isa.objj_msgSend0(oval6Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval6Path == null ? null : oval6Path.isa.objj_msgSend1(oval6Path, "setLineWidth:", 1));
+    (oval6Path == null ? null : oval6Path.isa.objj_msgSend0(oval6Path, "stroke"));
+}
+{
+    var bezier8Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend1(bezier8Path, "moveToPoint:", CPMakePoint(88.8, 127.68)));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend3(bezier8Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 103.97), CPMakePoint(102.94, 118.5), CPMakePoint(120.9, 108.67)));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend3(bezier8Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(223.9, 102.16), CPMakePoint(166.13, 96.7), CPMakePoint(197.48, 98.22)));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend1(bezier8Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend1(bezier8Path, "setLineWidth:", 1));
+    (bezier8Path == null ? null : bezier8Path.isa.objj_msgSend0(bezier8Path, "stroke"));
+    var bezier10Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "moveToPoint:", CPMakePoint(224.85, 97.59)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "lineToPoint:", CPMakePoint(237.22, 104.41)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "lineToPoint:", CPMakePoint(223.3, 106.79)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "lineToPoint:", CPMakePoint(224.85, 97.59)));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend0(bezier10Path, "closePath"));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend0(bezier10Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend1(bezier10Path, "setLineWidth:", 1));
+    (bezier10Path == null ? null : bezier10Path.isa.objj_msgSend0(bezier10Path, "stroke"));
+}
+{
+    var oval8Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(233.47, 166.62, 101.05, 47.99));
+    (waiting_color == null ? null : waiting_color.isa.objj_msgSend0(waiting_color, "setFill"));
+    (oval8Path == null ? null : oval8Path.isa.objj_msgSend0(oval8Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval8Path == null ? null : oval8Path.isa.objj_msgSend1(oval8Path, "setLineWidth:", 1));
+    (oval8Path == null ? null : oval8Path.isa.objj_msgSend0(oval8Path, "stroke"));
+}
+{
+    var bezier12Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend1(bezier12Path, "moveToPoint:", CPMakePoint(109.91, 157.32)));
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend3(bezier12Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(223.72, 179.25), CPMakePoint(143.42, 163.77), CPMakePoint(188.16, 172.4)));
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend1(bezier12Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend1(bezier12Path, "setLineWidth:", 1));
+    (bezier12Path == null ? null : bezier12Path.isa.objj_msgSend0(bezier12Path, "stroke"));
+    var bezier14Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "moveToPoint:", CPMakePoint(224.64, 174.68)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "lineToPoint:", CPMakePoint(236.85, 181.78)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "lineToPoint:", CPMakePoint(222.88, 183.84)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "lineToPoint:", CPMakePoint(224.64, 174.68)));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend0(bezier14Path, "closePath"));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend0(bezier14Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend1(bezier14Path, "setLineWidth:", 1));
+    (bezier14Path == null ? null : bezier14Path.isa.objj_msgSend0(bezier14Path, "stroke"));
+}
+{
+    var oval10Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithOvalInRect:", CPMakeRect(434.94, 173.28, 106.12, 47.99));
+    (finished_color == null ? null : finished_color.isa.objj_msgSend0(finished_color, "setFill"));
+    (oval10Path == null ? null : oval10Path.isa.objj_msgSend0(oval10Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (oval10Path == null ? null : oval10Path.isa.objj_msgSend1(oval10Path, "setLineWidth:", 1));
+    (oval10Path == null ? null : oval10Path.isa.objj_msgSend0(oval10Path, "stroke"));
+}
+{
+    var bezier16Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend1(bezier16Path, "moveToPoint:", CPMakePoint(311.24, 50.94)));
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend3(bezier16Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(450.86, 167.4), CPMakePoint(346.77, 80.58), CPMakePoint(410.77, 133.96)));
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend1(bezier16Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend1(bezier16Path, "setLineWidth:", 1));
+    (bezier16Path == null ? null : bezier16Path.isa.objj_msgSend0(bezier16Path, "stroke"));
+    var bezier18Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "moveToPoint:", CPMakePoint(454.24, 164.15)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "lineToPoint:", CPMakePoint(461.49, 176.27)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "lineToPoint:", CPMakePoint(448.26, 171.31)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "lineToPoint:", CPMakePoint(454.24, 164.15)));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend0(bezier18Path, "closePath"));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend0(bezier18Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend1(bezier18Path, "setLineWidth:", 1));
+    (bezier18Path == null ? null : bezier18Path.isa.objj_msgSend0(bezier18Path, "stroke"));
+}
+{
+    var bezier20Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend1(bezier20Path, "moveToPoint:", CPMakePoint(233.4, 123.09)));
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend3(bezier20Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(124.86, 138.77), CPMakePoint(201.4, 127.71), CPMakePoint(159.37, 133.79)));
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend1(bezier20Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend1(bezier20Path, "setLineWidth:", 1));
+    (bezier20Path == null ? null : bezier20Path.isa.objj_msgSend0(bezier20Path, "stroke"));
+    var bezier22Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "moveToPoint:", CPMakePoint(125.42, 143.41)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "lineToPoint:", CPMakePoint(111.56, 140.7)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "lineToPoint:", CPMakePoint(124.09, 134.17)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "lineToPoint:", CPMakePoint(125.42, 143.41)));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend0(bezier22Path, "closePath"));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend0(bezier22Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend1(bezier22Path, "setLineWidth:", 1));
+    (bezier22Path == null ? null : bezier22Path.isa.objj_msgSend0(bezier22Path, "stroke"));
+}
+{
+    var bezier24Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend1(bezier24Path, "moveToPoint:", CPMakePoint(250.3, 208.56)));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend3(bezier24Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 222.6), CPMakePoint(220.5, 222.6), CPMakePoint(175.47, 237.46)));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend3(bezier24Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(85.68, 181.26), CPMakePoint(117.72, 214.14), CPMakePoint(99.29, 196.99)));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend1(bezier24Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend1(bezier24Path, "setLineWidth:", 1));
+    (bezier24Path == null ? null : bezier24Path.isa.objj_msgSend0(bezier24Path, "stroke"));
+    var bezier26Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "moveToPoint:", CPMakePoint(81.89, 183.99)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "lineToPoint:", CPMakePoint(77.06, 170.72)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "lineToPoint:", CPMakePoint(89.11, 178.08)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "lineToPoint:", CPMakePoint(81.89, 183.99)));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend0(bezier26Path, "closePath"));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend0(bezier26Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend1(bezier26Path, "setLineWidth:", 1));
+    (bezier26Path == null ? null : bezier26Path.isa.objj_msgSend0(bezier26Path, "stroke"));
+}
+{
+    var bezier28Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend1(bezier28Path, "moveToPoint:", CPMakePoint(450.03, 214.07)));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend3(bezier28Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(138.67, 234.6), CPMakePoint(383.61, 241.85), CPMakePoint(240.75, 289.16)));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend3(bezier28Path, "curveToPoint:controlPoint1:controlPoint2:", CPMakePoint(83.08, 182.36), CPMakePoint(115.99, 222.47), CPMakePoint(96.71, 200.93)));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend1(bezier28Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend1(bezier28Path, "setLineWidth:", 1));
+    (bezier28Path == null ? null : bezier28Path.isa.objj_msgSend0(bezier28Path, "stroke"));
+    var bezier30Path = CPBezierPath.isa.objj_msgSend0(CPBezierPath, "bezierPath");
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "moveToPoint:", CPMakePoint(79.15, 184.88)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "lineToPoint:", CPMakePoint(75.34, 171.29)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "lineToPoint:", CPMakePoint(86.8, 179.54)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "lineToPoint:", CPMakePoint(79.15, 184.88)));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend0(bezier30Path, "closePath"));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "setMiterLimit:", 4));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setFill"))];
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend0(bezier30Path, "fill"));
+    [((___r1 = CPColor.isa.objj_msgSend0(CPColor, "blackColor")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "setStroke"))];
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend1(bezier30Path, "setLineWidth:", 1));
+    (bezier30Path == null ? null : bezier30Path.isa.objj_msgSend0(bezier30Path, "stroke"));
+}
+    var graph_rasterized_overlay2Path = CPBezierPath.isa.objj_msgSend1(CPBezierPath, "bezierPathWithRect:", CPMakeRect(0, 0, 547, 266));
+    CPGraphicsContext.isa.objj_msgSend0(CPGraphicsContext, "saveGraphicsState");
+    (graph_rasterized_overlay2Path == null ? null : graph_rasterized_overlay2Path.isa.objj_msgSend0(graph_rasterized_overlay2Path, "addClip"));
+    (graph_rasterized_overlay == null ? null : graph_rasterized_overlay.isa.objj_msgSend(graph_rasterized_overlay, "drawInRect:fromRect:operation:fraction:respectFlipped:hints:", CPMakeRect(0, 1, (graph_rasterized_overlay == null ? null : graph_rasterized_overlay.isa.objj_msgSend0(graph_rasterized_overlay, "size")).width, (graph_rasterized_overlay == null ? null : graph_rasterized_overlay.isa.objj_msgSend0(graph_rasterized_overlay, "size")).height), CPZeroRect, CPCompositeSourceOver, 1, YES, nil));
+    CPGraphicsContext.isa.objj_msgSend0(CPGraphicsContext, "restoreGraphicsState");
+    var ___r1;
+}
+,["void","CPString"])]);
+}p;14;StyleKitMock.jt;3070;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.jt;3003;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);CPFontAttributeName = "CPFontAttributeName";
+CPForegroundColorAttributeName = "CPForegroundColorAttributeName";
+CPParagraphStyleAttributeName = "CPParagraphStyleAttributeName";
+CPCompositeSourceOver = "CPCompositeSourceOver";
+CPZeroRect = CGRectMakeZero;
+{var the_class = objj_allocateClassPair(CPObject, "CPMutableParagraphStyle"),
+meta_class = the_class.isa;objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("set_alignment:"), function $CPMutableParagraphStyle__set_alignment_(self, _cmd, alignment)
+{
+}
+,["void","id"])]);
+class_addMethods(meta_class, [new objj_method(sel_getUid("defaultParagraphStyle"), function $CPMutableParagraphStyle__defaultParagraphStyle(self, _cmd)
+{
+    return ((___r1 = CPMutableParagraphStyle.isa.objj_msgSend0(CPMutableParagraphStyle, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "init"));
+    var ___r1;
+}
+,["id"])]);
+}{
+var the_class = objj_getClass("CPString")
+if(!the_class) throw new SyntaxError("*** Could not find definition for class \"CPString\"");
+var meta_class = the_class.isa;class_addMethods(the_class, [new objj_method(sel_getUid("drawInRect:withAttributes:"), function $CPString__drawInRect_withAttributes_(self, _cmd, aRect, attributes)
+{
+}
+,["void","NSRect","CPDictionary"])]);
+}{
+var the_class = objj_getClass("CPBezierPath")
+if(!the_class) throw new SyntaxError("*** Could not find definition for class \"CPBezierPath\"");
+var meta_class = the_class.isa;class_addMethods(the_class, [new objj_method(sel_getUid("setMiterLimit:"), function $CPBezierPath__setMiterLimit_(self, _cmd, mitterLimit)
+{
+}
+,["void","CGFloat"])]);
+}{
+var the_class = objj_getClass("CPImage")
+if(!the_class) throw new SyntaxError("*** Could not find definition for class \"CPImage\"");
+var meta_class = the_class.isa;class_addMethods(the_class, [new objj_method(sel_getUid("drawInRect:fromRect:operation:fraction:"), function $CPImage__drawInRect_fromRect_operation_fraction_(self, _cmd, dstRect, srcRect, op, delta)
+{
+    var ctx = ((___r1 = CPGraphicsContext.isa.objj_msgSend0(CPGraphicsContext, "currentContext")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "graphicsPort"));
+    CGContextDrawImage(ctx, dstRect, self);
+    var ___r1;
+}
+,["void","CPRect","CPRect","NSCompositingOperation","CGFloat"]), new objj_method(sel_getUid("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), function $CPImage__drawInRect_fromRect_operation_fraction_respectFlipped_hints_(self, _cmd, dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
+{
+    var ctx = ((___r1 = CPGraphicsContext.isa.objj_msgSend0(CPGraphicsContext, "currentContext")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "graphicsPort"));
+    CGContextDrawImage(ctx, dstSpacePortionRect, self);
+    var ___r1;
+}
+,["void","CPRect","CPRect","NSCompositingOperation","CGFloat","bool","CPDictionary"])]);
 }p;8;UIIcon.jt;841;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;15;UIIconMapping.jt;755;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("UIIconMapping.j", YES);var CachedIcons = CPMutableDictionary.isa.objj_msgSend0(CPMutableDictionary, "dictionary");
 UIIcon = function(name, width, height)
 {
@@ -720,7 +1467,7 @@ UIIcon = function(name, width, height)
     return icon;
 }
 p;15;UIIconMapping.jt;51;@STATIC;1.0;t;34;UIIconMapping = {"user": "user"};
-p;6;User.jt;3329;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.jt;3267;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);{var the_class = objj_allocateClassPair(RemoteObject, "User"),
+p;6;User.jt;4562;@STATIC;1.0;i;19;Ratatosk/Ratatosk.ji;14;RemoteObject.jI;33;Foundation/CPUserSessionManager.jt;4462;objj_executeFile("Ratatosk/Ratatosk.j", YES);objj_executeFile("RemoteObject.j", YES);objj_executeFile("Foundation/CPUserSessionManager.j", NO);{var the_class = objj_allocateClassPair(RemoteObject, "User"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("username"), new objj_ivar("email"), new objj_ivar("manager"), new objj_ivar("password"), new objj_ivar("manager")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("username"), function $User__username(self, _cmd)
 {
@@ -793,7 +1540,22 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("remoteProperties"), fu
 {
     return "users";
 }
-,["CPString"])]);
+,["CPString"]), new objj_method(sel_getUid("fetchCurrent"), function $User__fetchCurrent(self, _cmd)
+{
+    WLRemoteAction.isa.objj_msgSend(WLRemoteAction, "schedule:path:delegate:message:", WLRemoteActionGetType, self.isa.objj_msgSend0(self, "remoteName") + "/current", self, "Loading current User");
+}
+,["User"]), new objj_method(sel_getUid("current"), function $User__current(self, _cmd)
+{
+    return ((___r1 = CPUserSessionManager.isa.objj_msgSend0(CPUserSessionManager, "defaultManager")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "userIdentifier"));
+    var ___r1;
+}
+,["User"]), new objj_method(sel_getUid("remoteActionDidFinish:"), function $User__remoteActionDidFinish_(self, _cmd, anAction)
+{
+    var user = ((___r1 = User.isa.objj_msgSend0(User, "alloc")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "initWithJson:", (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "result"))));
+    ((___r1 = CPUserSessionManager.isa.objj_msgSend0(CPUserSessionManager, "defaultManager")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setUserIdentifier:", user));
+    var ___r1;
+}
+,["void","WLRemoteAction"])]);
 }p;16;UserController.jt;3776;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;18;USViewController.ji;6;User.ji;8;UIIcon.ji;26;PasswordChangeController.jt;3633;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("USViewController.j", YES);objj_executeFile("User.j", YES);objj_executeFile("UIIcon.j", YES);objj_executeFile("PasswordChangeController.j", YES);{var the_class = objj_allocateClassPair(USViewController, "UserController"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_buttonBar")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("awakeFromCib"), function $UserController__awakeFromCib(self, _cmd)
@@ -841,7 +1603,21 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("objectClass"), functio
     return User;
 }
 ,["class"])]);
-}p;20;UserSessionManager.jt;10293;@STATIC;1.0;I;21;Foundation/CPObject.jI;28;Foundation/CPURLConnection.jI;33;Foundation/CPUserSessionManager.ji;17;LoginController.jt;10154;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPURLConnection.j", NO);objj_executeFile("Foundation/CPUserSessionManager.j", NO);objj_executeFile("LoginController.j", YES);var DefaultSessionManager = nil;
+}p;10;UserList.jt;1038;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;6;User.jt;962;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("User.j", YES);{var the_class = objj_allocateClassPair(CPObject, "UserList"),
+meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_delegate")]);objj_registerClassPair(the_class);
+class_addMethods(the_class, [new objj_method(sel_getUid("fetchAll:"), function $UserList__fetchAll_(self, _cmd, aDelegate)
+{
+    self._delegate = aDelegate;
+    User.isa.objj_msgSend1(User, "fetchAll:", self);
+}
+,["void","id"]), new objj_method(sel_getUid("remoteActionDidFinish:"), function $UserList__remoteActionDidFinish_(self, _cmd, anAction)
+{
+    var users = User.isa.objj_msgSend1(User, "objectsFromJson:", (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "result")));
+    ((___r1 = self._delegate), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "userListRecievedUsers:", users));
+    var ___r1;
+}
+,["void","WLRemoteAction"])]);
+}p;20;UserSessionManager.jt;9685;@STATIC;1.0;I;21;Foundation/CPObject.jI;28;Foundation/CPURLConnection.jI;33;Foundation/CPUserSessionManager.ji;17;LoginController.ji;6;User.jt;9537;objj_executeFile("Foundation/CPObject.j", NO);objj_executeFile("Foundation/CPURLConnection.j", NO);objj_executeFile("Foundation/CPUserSessionManager.j", NO);objj_executeFile("LoginController.j", YES);objj_executeFile("User.j", YES);var DefaultSessionManager = nil;
 {var the_class = objj_allocateClassPair(CPUserSessionManager, "UserSessionManager"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_loginDelegate"), new objj_ivar("_loginProvider"), new objj_ivar("_loginConnection"), new objj_ivar("_logoutConnection"), new objj_ivar("_authenticationToken")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), function $UserSessionManager__loginProvider(self, _cmd)
@@ -868,7 +1644,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
 ,["id"]), new objj_method(sel_getUid("logout:"), function $UserSessionManager__logout_(self, _cmd, delegate)
 {
     var request = CPURLRequest.isa.objj_msgSend1(CPURLRequest, "requestWithURL:", ((___r1 = CPBundle.isa.objj_msgSend0(CPBundle, "mainBundle")), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "objectForInfoDictionaryKey:", "AuthLogoutURL")) || "/session/");
-    (request == null ? null : request.isa.objj_msgSend1(request, "setHTTPMethod:", "DELETE"));
     self._logoutConnection = CPURLConnection.isa.objj_msgSend2(CPURLConnection, "connectionWithRequest:delegate:", request, self);
     self._logoutConnection.delegate = delegate;
     var ___r1;
@@ -890,7 +1665,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
     var selectorToPerform;
     if (returnCode === LoginSucceeded)
     {
-        self.isa.objj_msgSend1(self, "_setCurrentUser:", ((___r1 = self._loginProvider), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "username")));
         self._authenticationToken = ((___r1 = self._loginProvider), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "authenticationToken"));
         selectorToPerform = sel_getUid("loginDidSucceed:");
     }
@@ -901,20 +1675,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
     self._loginDelegate = nil;
     var ___r1;
 }
-,["void","unsigned"]), new objj_method(sel_getUid("_setCurrentUser:"), function $UserSessionManager___setCurrentUser_(self, _cmd, aUser)
-{
-    if (aUser)
-    {
-        self.isa.objj_msgSend1(self, "setStatus:", CPUserSessionLoggedInStatus);
-        self.isa.objj_msgSend1(self, "setUserIdentifier:", aUser);
-    }
-    else
-    {
-        self.isa.objj_msgSend1(self, "setStatus:", CPUserSessionLoggedOutStatus);
-        self.isa.objj_msgSend1(self, "setUserIdentifier:", nil);
-    }
-}
-,["void","CPString"]), new objj_method(sel_getUid("connection:didFailWithError:"), function $UserSessionManager__connection_didFailWithError_(self, _cmd, aConnection, anException)
+,["void","unsigned"]), new objj_method(sel_getUid("connection:didFailWithError:"), function $UserSessionManager__connection_didFailWithError_(self, _cmd, aConnection, anException)
 {
     var delegate = aConnection.delegate;
     if (aConnection === self._logoutConnection)
@@ -940,7 +1701,9 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
         (aConnection == null ? null : aConnection.isa.objj_msgSend0(aConnection, "cancel"));
         if (statusCode === 200)
         {
-            self.isa.objj_msgSend1(self, "_setCurrentUser:", nil);
+            self.isa.objj_msgSend1(self, "setStatus:", CPUserSessionLoggedInStatus);
+            self.isa.objj_msgSend1(self, "setUserIdentifier:", nil);
+            self._authenticationToken = nil;
             if (delegate && (delegate == null ? null : delegate.isa.objj_msgSend1(delegate, "respondsToSelector:", sel_getUid("logoutDidSucceed:"))))
                 (delegate == null ? null : delegate.isa.objj_msgSend1(delegate, "logoutDidSucceed:", self));
         }
@@ -954,8 +1717,6 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
         return;
     var responseBody = (data == null ? null : data.isa.objj_msgSend0(data, "objectFromJSON")),
         delegate = aConnection.delegate;
-    if (responseBody.username)
-        self.isa.objj_msgSend1(self, "_setCurrentUser:", responseBody.username);
     if (delegate && (delegate == null ? null : delegate.isa.objj_msgSend1(delegate, "respondsToSelector:", sel_getUid("sessionSyncDidSucceed:"))))
         (delegate == null ? null : delegate.isa.objj_msgSend1(delegate, "sessionSyncDidSucceed:", self));
 }
@@ -963,7 +1724,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
 {
     self._loginConnection = aConnection;
     ((___r1 = self._loginConnection), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "cancel"));
-    self.isa.objj_msgSend1(self, "_setCurrentUser:", nil);
+    self.isa.objj_msgSend1(self, "setStatus:", CPUserSessionLoggedInStatus);
     self.isa.objj_msgSend1(self, "login:", self);
     if (((___r1 = ((___r2 = self._loginConnection), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "delegate"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "respondsToSelector:", sel_getUid("sessionManagerDidInterceptAuthenticationChallenge:forConnection:"))))
         ((___r1 = ((___r2 = self._loginConnection), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "delegate"))), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "sessionManagerDidInterceptAuthenticationChallenge:forConnection:", self, aConnection));
@@ -981,6 +1742,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("loginProvider"), functi
     ((___r1 = self._loginConnection._request._HTTPHeaderFields), ___r1 == null ? null : ___r1.isa.objj_msgSend2(___r1, "setObject:forKey:", "Token " + self._authenticationToken, "Authorization"));
     ((___r1 = self._loginConnection), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "start"));
     self._loginConnection = nil;
+    User.isa.objj_msgSend0(User, "fetchCurrent");
     var ___r1;
 }
 ,["void","id"])]);
@@ -993,7 +1755,7 @@ class_addMethods(meta_class, [new objj_method(sel_getUid("defaultManager"), func
 }
 ,["UserSessionManager"])]);
 }CPURLConnection.isa.objj_msgSend1(CPURLConnection, "setClassDelegate:", UserSessionManager.isa.objj_msgSend0(UserSessionManager, "defaultManager"));
-p;18;USViewController.jt;11577;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;6;User.ji;19;ZxcvbnTransformer.jt;11475;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("User.j", YES);objj_executeFile("ZxcvbnTransformer.j", YES);{var the_class = objj_allocateClassPair(CPViewController, "USViewController"),
+p;18;USViewController.jt;11275;@STATIC;1.0;I;23;Foundation/Foundation.jI;15;AppKit/AppKit.ji;6;User.ji;19;ZxcvbnTransformer.jt;11173;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("AppKit/AppKit.j", NO);objj_executeFile("User.j", YES);objj_executeFile("ZxcvbnTransformer.j", YES);{var the_class = objj_allocateClassPair(CPViewController, "USViewController"),
 meta_class = the_class.isa;class_addIvars(the_class, [new objj_ivar("_arrayController"), new objj_ivar("_mainContentView"), new objj_ivar("_tableView"), new objj_ivar("_predicateEditorView"), new objj_ivar("_filterPredicate"), new objj_ivar("_inspectorWindow")]);objj_registerClassPair(the_class);
 class_addMethods(the_class, [new objj_method(sel_getUid("filterPredicate"), function $USViewController__filterPredicate(self, _cmd)
 {
@@ -1119,8 +1881,7 @@ class_addMethods(the_class, [new objj_method(sel_getUid("filterPredicate"), func
 ,["void"]), new objj_method(sel_getUid("fetchAll"), function $USViewController__fetchAll(self, _cmd)
 {
     ((___r1 = ((___r2 = self._arrayController), ___r2 == null ? null : ___r2.isa.objj_msgSend1(___r2, "mutableArrayValueForKey:", "content"))), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "removeAllObjects"));
-    var remoteName = ((___r1 = ((___r2 = self.isa.objj_msgSend0(self, "class")), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "objectClass"))), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "remoteName"));
-    WLRemoteAction.isa.objj_msgSend(WLRemoteAction, "schedule:path:delegate:message:", WLRemoteActionGetType, remoteName, self, "Loading all IDs");
+    ((___r1 = ((___r2 = self.isa.objj_msgSend0(self, "class")), ___r2 == null ? null : ___r2.isa.objj_msgSend0(___r2, "objectClass"))), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "fetchAll:", self));
     var ___r1, ___r2;
 }
 ,["void"]), new objj_method(sel_getUid("addObject:"), function $USViewController__addObject_(self, _cmd, sender)
@@ -1141,17 +1902,14 @@ class_addMethods(the_class, [new objj_method(sel_getUid("filterPredicate"), func
 {
     var objectClass = ((___r1 = self.isa.objj_msgSend0(self, "class")), ___r1 == null ? null : ___r1.isa.objj_msgSend0(___r1, "objectClass")),
         objects = (objectClass == null ? null : objectClass.isa.objj_msgSend1(objectClass, "objectsFromJson:", (anAction == null ? null : anAction.isa.objj_msgSend0(anAction, "result"))));
-    ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObjects:", objects));
     if ((objects == null ? null : objects.isa.objj_msgSend0(objects, "count")) > 0)
+    {
+        ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "addObjects:", objects));
         ((___r1 = self._arrayController), ___r1 == null ? null : ___r1.isa.objj_msgSend1(___r1, "setSelectedObjects:", CPArray.isa.objj_msgSend1(CPArray, "arrayWithObject:", ((___r2 = ((___r3 = self._arrayController), ___r3 == null ? null : ___r3.isa.objj_msgSend0(___r3, "arrangedObjects"))), ___r2 == null ? null : ___r2.isa.objj_msgSend1(___r2, "objectAtIndex:", 0)))));
+    }
     var ___r1, ___r2, ___r3;
 }
 ,["void","WLRemoteAction"])]);
-class_addMethods(meta_class, [new objj_method(sel_getUid("objectClass"), function $USViewController__objectClass(self, _cmd)
-{
-    debugger;
-}
-,["class"])]);
 }p;19;ZxcvbnTransformer.jt;3363;@STATIC;1.0;I;23;Foundation/Foundation.ji;9;zxcvbn.jst;3303;objj_executeFile("Foundation/Foundation.j", NO);objj_executeFile("zxcvbn.js", YES);{var the_class = objj_allocateClassPair(CPValueTransformer, "ZxcvbnTransformer"),
 meta_class = the_class.isa;objj_registerClassPair(the_class);
 class_addMethods(meta_class, [new objj_method(sel_getUid("allowsReverseTransformation"), function $ZxcvbnTransformer__allowsReverseTransformation(self, _cmd)
