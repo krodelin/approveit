@@ -3,6 +3,8 @@ import hashlib
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework.fields import SerializerMethodField
+from rest_framework.serializers import ListSerializer
 
 from rest.models import Project, PersonRequest
 
@@ -66,7 +68,21 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PersonRequestSerializer(serializers.HyperlinkedModelSerializer):
+    possible_actions = SerializerMethodField()
+    allowed_actions = SerializerMethodField()
+
+    def current_user(self):
+        return (self.context.get('request', None)).user
+
+    def get_possible_actions(self, person_request):
+        return map(lambda transition: transition.name, person_request.possible_actions(self.current_user()))
+
+    def get_allowed_actions(self, person_request):
+        return map(lambda transition: transition.name, person_request.allowed_actions(self.current_user()))
+
     class Meta:
         model = PersonRequest
-        fields = ('url', 'title', 'notes', 'project', 'requester', 'requestee', 'status')
+        fields = (
+            'url', 'title', 'notes', 'project', 'requester', 'requestee', 'status', 'possible_actions',
+            'allowed_actions')
         read_only_fields = ('status',)

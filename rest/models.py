@@ -58,36 +58,33 @@ class PersonRequest(models.Model):
     requestee = models.ForeignKey(User, related_name='requestee_requests')
     status = FSMField(default=Status.PENDING)
 
-
     @transition(field=status, source=Status.PENDING, target=Status.APPROVED)
     def approve(self, by):
-        self.ensure_can_transition(by, Transition.APPROVE)
+        pass
 
     @transition(field=status, source=Status.PENDING, target=Status.REJECTED)
     def reject(self, by):
-        self.ensure_can_transition(by, Transition.REJECT)
+        pass
 
     @transition(field=status, source=Status.PENDING, target=Status.WAITING)
     def request(self, by):
-        self.ensure_can_transition(by, Transition.REQUEST)
+        pass
 
     @transition(field=status, source=Status.WAITING, target=Status.PENDING)
     def provide(self, by):
-        self.ensure_can_transition(by, Transition.PROVIDE)
+        pass
 
     @transition(field=status, source=(Status.APPROVED), target=Status.FINISHED)
     def finish(self, by):
-        self.ensure_can_transition(by, Transition.FINISH)
+        pass
 
     @transition(field=status, source=(Status.REJECTED, Status.FINISHED), target=Status.PENDING)
     def reopen(self, by):
-        self.ensure_can_transition(by, Transition.REOPEN)
+        pass
 
-    def ensure_can_transition(self, user, transition_name):
-        if not self.can_transition(user, transition_name):
-            raise PermissionDenied
 
-    def can_transition(self, user, transition_name):
+    def can_transition(self, user, transition_method):
+        transition_name = transition_method.__name__
         if transition_name == Transition.APPROVE or transition_name == Transition.REJECT or transition_name == Transition.REQUEST:
             return user == self.requestee.profile.manager
 
@@ -95,5 +92,13 @@ class PersonRequest(models.Model):
             return user == self.requester or user == self.requestee
 
         return False
+
+    def possible_actions(self, user):
+        return self.get_available_status_transitions()
+
+    def allowed_actions(self, user):
+        available_user_status_transitions = self.get_available_user_status_transitions(user)
+        return (each for each in available_user_status_transitions if self.can_transition(user, each.method))
+
 
 
