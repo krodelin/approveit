@@ -4,18 +4,16 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
 
-def can_transition(user, transition_method, object):
-    return has_transition_perm(transition_method, user) and object.can_transition(user, transition_method)
-
-
 def get_transition_viewset_method(model, transition_name):
     @detail_route(methods=['post'])
     def inner_func(self, request, pk=None):
         object = self.get_object()
         transition_method = getattr(object, transition_name)
-        if not can_transition(request.user, transition_method, object):
+        if not has_transition_perm(transition_method, request.user):
             raise PermissionDenied
-        transition_method()
+        if not object.can_transition(request.user, transition_method):
+            raise PermissionDenied
+        transition_method(by=request.user)
 
         if self.save_after_transition:
             object.save()

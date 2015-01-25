@@ -1,5 +1,5 @@
 from django_fsm import has_transition_perm
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, detail_route, list_route
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
@@ -26,8 +26,11 @@ def api_root(request, format=None):
 
 
 class AuthMixin:
-    authentication_classes = (TokenAuthentication,
-                              SessionAuthentication)
+    authentication_classes = (
+        # BasicAuthentication,
+        TokenAuthentication,
+        SessionAuthentication,
+    )
     permission_classes = (permissions.IsAuthenticated,)
 
 
@@ -53,21 +56,12 @@ class PersonRequestViewSet(AuthMixin,
     queryset = PersonRequest.objects.all()
     serializer_class = PersonRequestSerializer
 
-    @detail_route(methods=['post'])
-    def approve(self, request, pk):
-        person_request = get_object_or_404(PersonRequest, pk=pk)
-        self.get_object()
-        if not has_transition_perm(person_request.approve, request.user):
-            raise PermissionDenied
-        person_request.approve()
-        person_request.save()
-        return Response(PersonRequestSerializer(person_request, context={'request': request}).data)
-
 
 class DeleteAuthToken(APIView):
     renderer_classes = (JSONRenderer,)
 
     def get(self, request, format=None):
         return Response({'response': 'success'})
+
 
 delete_auth_token = DeleteAuthToken.as_view()
